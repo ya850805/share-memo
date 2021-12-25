@@ -13,11 +13,17 @@
   <sql id="Base_Column_List">
     id, `name`, email, create_timestamp, create_user, update_timestamp, update_user
   </sql>
+
   <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
     select 
     <include refid="Base_Column_List" />
     from member
     where id = #{id,jdbcType=INTEGER}
   </select>
+
+  <insert id="create">
+    INSERT INTO member(name, email, create_timestamp, create_user, update_timestamp, update_user)
+                VALUES (#{name}, #{email}, #{createTimestamp}, #{createUser}, #{updateTimestamp}, #{updateUser})
+  </insert>
 
 </mapper>

@@ -6,4 +6,5 @@ import org.apache.ibatis.annotations.Mapper;
 @Mapper
 public interface MemberMapper {
   Member selectByPrimaryKey(Integer id);
+  void create(Member member);
 }
