@@ -5,9 +5,9 @@
     <id column="id" jdbcType="INTEGER" property="id" />
     <result column="name" jdbcType="VARCHAR" property="name" />
     <result column="email" jdbcType="VARCHAR" property="email" />
-    <result column="create_timestamp" jdbcType="VARCHAR" property="createTimestamp" />
+    <result column="create_timestamp" jdbcType="TIMESTAMP" property="createTimestamp" />
     <result column="create_user" jdbcType="VARCHAR" property="createUser" />
-    <result column="update_timestamp" jdbcType="VARCHAR" property="updateTimestamp" />
+    <result column="update_timestamp" jdbcType="TIMESTAMP" property="updateTimestamp" />
     <result column="update_user" jdbcType="VARCHAR" property="updateUser" />
   </resultMap>
   <sql id="Base_Column_List">
@@ -25,5 +25,11 @@
     INSERT INTO member(name, email, create_timestamp, create_user, update_timestamp, update_user)
                 VALUES (#{name}, #{email}, #{createTimestamp}, #{createUser}, #{updateTimestamp}, #{updateUser})
   </insert>
+
+  <select id="findAll" resultMap="BaseResultMap">
+    SELECT
+    <include refid="Base_Column_List" />
+    FROM member;
+  </select>
 
 </mapper>
