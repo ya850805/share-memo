@@ -1,16 +1,40 @@
+spring:
+  profiles:
+    active:
 server:
   port: 8500
   servlet:
     context-path: /share-memo
 
+mybatis:
+  mapper-locations:
+    - classpath*:mybatis/*.xml
+  type-aliases-package: com.sharememo.entity
+
+---
 spring:
+  config:
+    activate:
+      on-profile: dev
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
     url: jdbc:mysql://localhost:3306/share-memo?useUnicode=true&characterEncoding=utf-8
     username: jason
     password:
 
-mybatis:
-  mapper-locations:
-    - classpath*:mybatis/*.xml
-  type-aliases-package: com.sharememo.entity
+---
+spring:
+  config:
+    activate:
+      on-profile: test
+  h2:
+    console:
+      enabled: true
+  datasource:
+    url: jdbc:h2:mem:share-memo
+    driver-class-name: org.h2.Driver
+    username: jason
+    password:
+  sql:
+    init:
+      schema-locations: classpath:sql/schema.sql
