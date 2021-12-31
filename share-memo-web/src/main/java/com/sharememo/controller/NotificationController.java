@@ -6,9 +6,7 @@ import com.sharememo.vo.R;
 import com.sharememo.vo.notification.NotificationCreateVo;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 /** @author Jason */
 @RestController
@@ -21,6 +19,12 @@ public class NotificationController {
     BeanUtils.copyProperties(vo, notification);
 
     notificationService.createNotification(notification);
+    return R.ok();
+  }
+
+  @DeleteMapping("/notification/{id}")
+  public R deleteNotification(@PathVariable("id") Integer id) {
+    notificationService.deleteNotification(id);
     return R.ok();
   }
 }

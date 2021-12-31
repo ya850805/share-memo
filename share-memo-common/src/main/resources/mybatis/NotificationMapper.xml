@@ -5,7 +5,6 @@
         <id column="id" jdbcType="INTEGER" property="id"/>
         <result column="subject" jdbcType="VARCHAR" property="subject"/>
         <result column="content" jdbcType="VARCHAR" property="content"/>
-        <result column="isSend" jdbcType="VARCHAR" property="isSend"/>
         <result column="create_timestamp" jdbcType="TIMESTAMP" property="createTimestamp"/>
         <result column="create_user" jdbcType="VARCHAR" property="createUser"/>
         <result column="update_timestamp" jdbcType="TIMESTAMP" property="updateTimestamp"/>
@@ -13,12 +12,18 @@
     </resultMap>
     <sql id="Base_Column_List">
         id
-        , subject, content, isSend, create_timestamp, create_user, update_timestamp, update_user
+        , subject, content, create_timestamp, create_user, update_timestamp, update_user
     </sql>
 
     <insert id="create">
-        INSERT INTO notification (subject, content, isSend, create_timestamp, create_user, update_timestamp,
+        INSERT INTO notification (subject, content, create_timestamp, create_user, update_timestamp,
                                   update_user)
-        VALUES (#{subject}, #{content}, #{isSend}, #{createTimestamp}, #{createUser}, #{updateTimestamp}, #{updateUser})
+        VALUES (#{subject}, #{content}, #{createTimestamp}, #{createUser}, #{updateTimestamp}, #{updateUser})
     </insert>
+
+    <delete id="delete">
+        DELETE
+        FROM notification
+        WHERE id = #{id}
+    </delete>
 </mapper>

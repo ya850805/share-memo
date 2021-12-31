@@ -19,12 +19,18 @@ public class NotificationServiceImpl implements NotificationService {
   @Override
   @Transactional
   public void createNotification(Notification notification) {
-    notification.setIsSend(YNEnum.Y.name());
     notification.setCreateTimestamp(LocalDateTime.now());
     notification.setCreateUser(ShareMemoConstant.SYS_USER);
     notification.setUpdateTimestamp(LocalDateTime.now());
     notification.setUpdateUser(ShareMemoConstant.SYS_USER);
 
     mapper.create(notification);
+  }
+
+  @Override
+  @Transactional
+  public void deleteNotification(Integer id) {
+    mapper.delete(id);
+    //TODO delete member_notification
   }
 }

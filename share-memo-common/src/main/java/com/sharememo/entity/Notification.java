@@ -17,8 +17,6 @@ public class Notification implements Serializable {
 
     private String content;
 
-    private String isSend;
-
     private LocalDateTime createTimestamp;
 
     private String createUser;

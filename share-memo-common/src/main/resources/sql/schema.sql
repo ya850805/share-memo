@@ -18,7 +18,6 @@ CREATE TABLE notification
     id               int(6) AUTO_INCREMENT PRIMARY KEY,
     subject          varchar(100)  NOT NULL,
     content          varchar(4000) NOT NULL,
-    isSend           int(1),
     create_timestamp varchar(30),
     create_user      varchar(20),
     update_timestamp varchar(30),
