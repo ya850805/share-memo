@@ -2,7 +2,11 @@ package com.sharememo.constant;
 
 import java.time.format.DateTimeFormatter;
 
-/** @author Jason */
+/**
+ * Share-memo project common constant.
+ * @author Jason
+ *
+ * */
 public class ShareMemoConstant {
   public static final String SYS_USER = "sysuser";
   public static final DateTimeFormatter DATE_TIME_FORMATTER =
