@@ -10,4 +10,5 @@ public interface MemberMapper {
   Member selectByPrimaryKey(Integer id);
   void create(Member member);
   List<Member> findAll();
+  void deleteByPrimaryKey(Integer id);
 }

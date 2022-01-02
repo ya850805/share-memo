@@ -33,4 +33,10 @@ public class MemberController {
   public List<Member> findAllMembers() {
     return memberService.findAllMembers();
   }
+
+  @DeleteMapping("/member/{id}")
+  public R deleteById(@PathVariable("id") Integer id) {
+    memberService.deleteById(id);
+    return R.ok();
+  }
 }

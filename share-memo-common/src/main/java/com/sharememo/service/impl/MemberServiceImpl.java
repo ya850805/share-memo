@@ -33,4 +33,9 @@ public class MemberServiceImpl implements MemberService {
   public List<Member> findAllMembers() {
     return memberMapper.findAll();
   }
+
+  @Override
+  public void deleteById(Integer id) {
+    memberMapper.deleteByPrimaryKey(id);
+  }
 }

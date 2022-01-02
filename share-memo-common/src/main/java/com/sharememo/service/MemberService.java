@@ -11,4 +11,6 @@ public interface MemberService {
   void createMember(Member member);
 
   List<Member> findAllMembers();
+
+  void deleteById(Integer id);
 }
