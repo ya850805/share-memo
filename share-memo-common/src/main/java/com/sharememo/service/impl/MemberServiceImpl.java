@@ -6,6 +6,7 @@ import com.sharememo.entity.Member;
 import com.sharememo.service.MemberService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDateTime;
 import java.util.List;
@@ -35,7 +36,16 @@ public class MemberServiceImpl implements MemberService {
   }
 
   @Override
+  @Transactional
   public void deleteById(Integer id) {
     memberMapper.deleteByPrimaryKey(id);
+  }
+
+  @Override
+  @Transactional
+  public void deleteByIds(List<Integer> ids) {
+    for (Integer id : ids) {
+      deleteById(id);
+    }
   }
 }

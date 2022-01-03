@@ -13,4 +13,6 @@ public interface MemberService {
   List<Member> findAllMembers();
 
   void deleteById(Integer id);
+
+  void deleteByIds(List<Integer> ids);
 }

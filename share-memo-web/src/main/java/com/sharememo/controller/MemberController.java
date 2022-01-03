@@ -39,4 +39,10 @@ public class MemberController {
     memberService.deleteById(id);
     return R.ok();
   }
+
+  @DeleteMapping("/members")
+  public R deleteByIds(@RequestParam("ids") List<Integer> ids) {
+    memberService.deleteByIds(ids);
+    return R.ok();
+  }
 }
