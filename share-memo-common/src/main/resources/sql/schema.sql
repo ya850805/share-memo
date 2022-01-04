@@ -28,8 +28,6 @@ CREATE TABLE member_notification
 (
     member_id        int(6)        NOT NULL,
     notification_id  int(6)        NOT NULL,
-    subject          varchar(100)  NOT NULL,
-    content          varchar(4000) NOT NULL,
     isSend           varchar(1)       NOT NULL,
     create_timestamp varchar(30),
     create_user      varchar(20),
