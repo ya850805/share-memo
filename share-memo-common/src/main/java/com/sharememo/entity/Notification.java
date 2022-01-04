@@ -1,6 +1,7 @@
 package com.sharememo.entity;
 
 import java.io.Serializable;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 import lombok.Data;
@@ -16,6 +17,8 @@ public class Notification implements Serializable {
     private String subject;
 
     private String content;
+
+    private LocalDate notificationDate;
 
     private LocalDateTime createTimestamp;
 

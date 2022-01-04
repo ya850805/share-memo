@@ -5,6 +5,7 @@
         <id column="id" jdbcType="INTEGER" property="id"/>
         <result column="subject" jdbcType="VARCHAR" property="subject"/>
         <result column="content" jdbcType="VARCHAR" property="content"/>
+        <result column="notification_date" jdbcType="DATE" property="notificationDate"/>
         <result column="create_timestamp" jdbcType="TIMESTAMP" property="createTimestamp"/>
         <result column="create_user" jdbcType="VARCHAR" property="createUser"/>
         <result column="update_timestamp" jdbcType="TIMESTAMP" property="updateTimestamp"/>
@@ -16,9 +17,10 @@
     </sql>
 
     <insert id="create">
-        INSERT INTO notification (subject, content, create_timestamp, create_user, update_timestamp,
+        INSERT INTO notification (subject, content, notification_date, create_timestamp, create_user, update_timestamp,
                                   update_user)
-        VALUES (#{subject}, #{content}, #{createTimestamp}, #{createUser}, #{updateTimestamp}, #{updateUser})
+        VALUES (#{subject}, #{content}, #{notificationDate}, #{createTimestamp}, #{createUser}, #{updateTimestamp},
+                #{updateUser})
     </insert>
 
     <delete id="delete">
