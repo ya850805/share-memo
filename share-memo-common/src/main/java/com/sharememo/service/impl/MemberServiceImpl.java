@@ -3,6 +3,7 @@ package com.sharememo.service.impl;
 import com.sharememo.constant.ShareMemoConstant;
 import com.sharememo.mapper.MemberMapper;
 import com.sharememo.entity.Member;
+import com.sharememo.service.MemberNotificationService;
 import com.sharememo.service.MemberService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -15,12 +16,14 @@ import java.util.List;
 @Service
 public class MemberServiceImpl implements MemberService {
   @Autowired private MemberMapper memberMapper;
+  @Autowired private MemberNotificationService memberNotificationService;
 
   public Member getById(Integer id) {
     return memberMapper.selectByPrimaryKey(id);
   }
 
   @Override
+  @Transactional
   public void createMember(Member member) {
     member.setCreateTimestamp(LocalDateTime.now());
     member.setCreateUser(ShareMemoConstant.SYS_USER);
@@ -38,6 +41,7 @@ public class MemberServiceImpl implements MemberService {
   @Override
   @Transactional
   public void deleteById(Integer id) {
+    memberNotificationService.deleteByMemberId(id);
     memberMapper.deleteByPrimaryKey(id);
   }
 
