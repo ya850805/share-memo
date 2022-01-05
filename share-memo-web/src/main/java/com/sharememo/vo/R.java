@@ -20,6 +20,8 @@ public class R extends HashMap<String, Object> {
   }
 
   public static R error() {
-    return new R(HttpStatus.FORBIDDEN.value(), "error");
+    return new R(
+        HttpStatus.INTERNAL_SERVER_ERROR.value(),
+        "Internal server error, please contact system administrator.");
   }
 }
