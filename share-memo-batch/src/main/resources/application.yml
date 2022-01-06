@@ -1,0 +1,43 @@
+spring:
+  profiles:
+    active:
+server:
+  port: 8501
+
+#mybatis:
+#  mapper-locations:
+#    - classpath*:mybatis/*.xml
+#  type-aliases-package: com.sharememo.entity
+
+---
+spring:
+  config:
+    activate:
+      on-profile: dev
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/share-memo?useUnicode=true&characterEncoding=utf-8
+    username: jason
+    password:
+  jpa:
+    show-sql: true
+---
+spring:
+  config:
+    activate:
+      on-profile: test
+  h2:
+    console:
+      enabled: true
+  datasource:
+    url: jdbc:h2:file:/Users/juanchong/Desktop/jason/share-memo;DB_CLOSE_ON_EXIT=FALSE
+    #    url: jdbc:h2:file:C:/Users/Jason/Desktop/share-memo/share-memo;DB_CLOSE_ON_EXIT=FALSE
+    #    url: jdbc:h2:mem:share-memo
+    driver-class-name: org.h2.Driver
+    username: jason
+    password:
+  sql:
+    init:
+      schema-locations: classpath:sql/schema.sql
+  jpa:
+    show-sql: true
