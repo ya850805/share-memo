@@ -1,8 +1,8 @@
 spring:
   profiles:
     active:
-server:
-  port: 8501
+#server:
+#  port: 8501
 
 #mybatis:
 #  mapper-locations:
