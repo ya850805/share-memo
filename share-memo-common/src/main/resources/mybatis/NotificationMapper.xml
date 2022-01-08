@@ -28,4 +28,10 @@
         FROM notification
         WHERE id = #{id}
     </delete>
+
+    <select id="findByNotificationDate" resultMap="BaseResultMap">
+        SELECT *
+        FROM notification
+        WHERE notification_date = #{notificationDate}
+    </select>
 </mapper>

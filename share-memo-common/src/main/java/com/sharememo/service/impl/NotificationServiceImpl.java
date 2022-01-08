@@ -9,7 +9,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.util.List;
 
 /** @author Jason */
 @Service
@@ -33,5 +35,10 @@ public class NotificationServiceImpl implements NotificationService {
   public void deleteNotification(Integer id) {
     memberNotificationService.deleteByNotificationId(id);
     mapper.delete(id);
+  }
+
+  @Override
+  public List<Notification> findByNotificationDate(LocalDate notificationDate) {
+    return mapper.findByNotificationDate(notificationDate.format(ShareMemoConstant.DATE_FORMATTER));
   }
 }
