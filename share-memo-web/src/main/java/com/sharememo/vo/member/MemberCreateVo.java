@@ -6,5 +6,6 @@ import lombok.Data;
 @Data
 public class MemberCreateVo {
   private String name;
+  private String lineId;
   private String email;
 }

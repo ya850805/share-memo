@@ -15,4 +15,6 @@ public interface MemberService {
   void deleteById(Integer id);
 
   void deleteByIds(List<Integer> ids);
+
+  void deleteByLineId(String lineId);
 }

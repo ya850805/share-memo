@@ -52,4 +52,9 @@ public class MemberServiceImpl implements MemberService {
       deleteById(id);
     }
   }
+
+  @Override
+  public void deleteByLineId(String lineId) {
+    memberMapper.deleteByLineId(lineId);
+  }
 }

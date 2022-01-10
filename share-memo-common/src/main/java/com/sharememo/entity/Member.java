@@ -15,6 +15,8 @@ public class Member implements Serializable {
 
     private String name;
 
+    private String lineId;
+
     private String email;
 
     private LocalDateTime createTimestamp;

@@ -11,4 +11,5 @@ public interface MemberMapper {
   void create(Member member);
   List<Member> findAll();
   void deleteByPrimaryKey(Integer id);
+  void deleteByLineId(String lineId);
 }

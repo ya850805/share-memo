@@ -6,6 +6,7 @@ CREATE TABLE member
 (
     id               int(6) AUTO_INCREMENT PRIMARY KEY,
     name             varchar(30) NOT NULL,
+    line_id          varchar(50),
     email            varchar(50),
     create_timestamp varchar(30),
     create_user      varchar(20),
@@ -27,8 +28,8 @@ CREATE TABLE notification
 
 CREATE TABLE member_notification
 (
-    member_id        int(6)     NOT NULL,
-    notification_id  int(6)     NOT NULL,
+    member_id        int(6) NOT NULL,
+    notification_id  int(6) NOT NULL,
     isSend           varchar(1) NOT NULL,
     create_timestamp varchar(30),
     create_user      varchar(20),
