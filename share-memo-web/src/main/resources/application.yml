@@ -11,6 +11,13 @@ mybatis:
     - classpath*:mybatis/*.xml
   type-aliases-package: com.sharememo.entity
 
+line:
+  bot:
+    channel-token:
+    channel-secret:
+    handler:
+      path: /callback
+
 ---
 spring:
   config:
