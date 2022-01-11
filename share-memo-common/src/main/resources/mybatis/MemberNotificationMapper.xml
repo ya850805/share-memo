@@ -35,4 +35,10 @@
         WHERE notification_id = #{notificationId}
     </delete>
 
+    <select id="findMemberIdsByNotificationId" resultType="java.lang.Integer">
+        SELECT member_id
+        FROM member_notification
+        WHERE notification_id = #{notificationId}
+    </select>
+
 </mapper>

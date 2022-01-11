@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDateTime;
+import java.util.List;
 
 /** @author Jason */
 @Service
@@ -38,5 +39,10 @@ public class MemberNotificationServiceImpl implements MemberNotificationService 
   @Transactional
   public void deleteByNotificationId(Integer notificationId) {
     mapper.deleteByNotificationId(notificationId);
+  }
+
+  @Override
+  public List<Integer> findMemberIdsByNotificationId(Integer notificationId) {
+    return mapper.findMemberIdsByNotificationId(notificationId);
   }
 }
