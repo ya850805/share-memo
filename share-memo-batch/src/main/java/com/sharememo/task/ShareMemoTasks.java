@@ -91,23 +91,27 @@ public class ShareMemoTasks {
     List<Member> members = memberService.findAllMembers();
     members.forEach(
         member -> {
-          lineMessagingClient.pushMessage(
-              new PushMessage(member.getLineId(), new TextMessage("測試訊息"), true));
+          if (StringUtils.isNotBlank(member.getLineId())) {
+            lineMessagingClient.pushMessage(
+                new PushMessage(member.getLineId(), new TextMessage("測試訊息"), true));
+          }
         });
   }
 
   /** Test for sending mail */
-//  @Scheduled(cron = "30 * * * * *")
+  //  @Scheduled(cron = "30 * * * * *")
   public void testMail() {
     List<Member> members = memberService.findAllMembers();
     members.forEach(
         member -> {
-          SimpleMailMessage message = new SimpleMailMessage();
-          message.setFrom(sender);
-          message.setTo(member.getEmail());
-          message.setSubject("測試主旨");
-          message.setText("測試內容");
-          javaMailSender.send(message);
+          if (StringUtils.isNotBlank(member.getEmail())) {
+            SimpleMailMessage message = new SimpleMailMessage();
+            message.setFrom(sender);
+            message.setTo(member.getEmail());
+            message.setSubject("測試主旨");
+            message.setText("測試內容");
+            javaMailSender.send(message);
+          }
         });
   }
 }
