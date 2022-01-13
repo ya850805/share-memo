@@ -18,6 +18,12 @@ line:
     handler:
       path: /callback
 
+# mybatis show sql
+logging:
+  level:
+    com:
+      sharememo:
+        mapper: debug
 ---
 spring:
   config:
@@ -28,8 +34,7 @@ spring:
     url: jdbc:mysql://localhost:3306/share-memo?useUnicode=true&characterEncoding=utf-8
     username: jason
     password:
-  jpa:
-    show-sql: true
+
 ---
 spring:
   config:
@@ -48,5 +53,3 @@ spring:
   sql:
     init:
       schema-locations: classpath:sql/schema.sql
-  jpa:
-    show-sql: true
