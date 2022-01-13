@@ -11,11 +11,15 @@ import com.sharememo.service.NotificationService;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.mail.SimpleMailMessage;
+import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
 
 import java.time.LocalDate;
 import java.util.List;
+import java.util.Objects;
 import java.util.concurrent.ExecutionException;
 import java.util.stream.Collectors;
 
@@ -28,6 +32,11 @@ public class ShareMemoTasks {
   @Autowired private MemberNotificationService memberNotificationService;
   @Autowired private LineMessagingClient lineMessagingClient;
 
+  @Autowired private JavaMailSender javaMailSender;
+
+  @Value("${spring.mail.username}")
+  private String sender;
+
   /** Send daily notifications at 00:00. */
   //  @Scheduled(cron = "45 * * * * *")
   //  @Scheduled(cron = "* * 0 * * *")
@@ -35,7 +44,6 @@ public class ShareMemoTasks {
     log.info("Execute Daily Tasks!!!");
     List<Notification> notifications = notificationService.findByNotificationDate(LocalDate.now());
     log.info(notifications.toString());
-
 
     for (Notification notification : notifications) {
       List<Member> members =
@@ -77,6 +85,7 @@ public class ShareMemoTasks {
         });
   }
 
+  /** Test for sending line message */
   //  @Scheduled(cron = "0 * * * * *")
   public void testLineMessage() {
     List<Member> members = memberService.findAllMembers();
@@ -84,6 +93,21 @@ public class ShareMemoTasks {
         member -> {
           lineMessagingClient.pushMessage(
               new PushMessage(member.getLineId(), new TextMessage("測試訊息"), true));
+        });
+  }
+
+  /** Test for sending mail */
+//  @Scheduled(cron = "30 * * * * *")
+  public void testMail() {
+    List<Member> members = memberService.findAllMembers();
+    members.forEach(
+        member -> {
+          SimpleMailMessage message = new SimpleMailMessage();
+          message.setFrom(sender);
+          message.setTo(member.getEmail());
+          message.setSubject("測試主旨");
+          message.setText("測試內容");
+          javaMailSender.send(message);
         });
   }
 }

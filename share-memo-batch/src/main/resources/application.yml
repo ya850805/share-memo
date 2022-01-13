@@ -1,6 +1,19 @@
 spring:
   profiles:
     active:
+  mail:
+    host: smtp.gmail.com
+    port: 587
+    username:
+    password:
+    properties:
+      mail:
+        smtp:
+          auth: true
+          starttls:
+            enabled: true
+            required: true
+
 #server:
 #  port: 8501
 
@@ -9,6 +22,7 @@ mybatis:
     - classpath*:mybatis/*.xml
   type-aliases-package: com.sharememo.entity
 
+# line bot setting
 line:
   bot:
     channel-token:
