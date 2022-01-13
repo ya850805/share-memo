@@ -12,4 +12,5 @@ public interface MemberMapper {
   List<Member> findAll();
   void deleteByPrimaryKey(Integer id);
   void deleteByLineId(String lineId);
+  void updateMember(Member member);
 }

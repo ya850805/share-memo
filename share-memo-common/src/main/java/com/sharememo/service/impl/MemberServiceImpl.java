@@ -57,4 +57,11 @@ public class MemberServiceImpl implements MemberService {
   public void deleteByLineId(String lineId) {
     memberMapper.deleteByLineId(lineId);
   }
+
+  @Override
+  public void updateMember(Member member) {
+    member.setUpdateTimestamp(LocalDateTime.now());
+    member.setUpdateUser(ShareMemoConstant.SYS_USER);
+    memberMapper.updateMember(member);
+  }
 }

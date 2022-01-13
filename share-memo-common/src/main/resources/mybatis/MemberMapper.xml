@@ -46,4 +46,21 @@
         WHERE line_id = #{lineId}
     </delete>
 
+    <update id="updateMember">
+        UPDATE member
+        <set>
+            <if test="name != null and name != ''">
+                name = #{name},
+            </if>
+            <if test="lineId != null and lineId != ''">
+                line_id = #{lineId},
+            </if>
+            <if test="email != null and email != ''">
+                email = #{email},
+            </if>
+            update_timestamp = #{updateTimestamp},
+            update_user = #{updateUser}
+        </set>
+        WHERE id = #{id}
+    </update>
 </mapper>

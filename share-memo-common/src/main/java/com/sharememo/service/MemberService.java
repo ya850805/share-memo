@@ -17,4 +17,6 @@ public interface MemberService {
   void deleteByIds(List<Integer> ids);
 
   void deleteByLineId(String lineId);
+
+  void updateMember(Member member);
 }
