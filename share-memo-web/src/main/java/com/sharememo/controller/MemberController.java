@@ -9,8 +9,10 @@ import com.sharememo.vo.member.MemberUpdateVo;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.util.List;
 
 /** @author Jason */
@@ -50,9 +52,7 @@ public class MemberController {
   }
 
   @PutMapping("/member")
-  public R updateMember(@RequestBody MemberUpdateVo vo) {
-    if (vo.getId() == null) throw new ShareMemoException(HttpStatus.INTERNAL_SERVER_ERROR.value(), "請選擇欲修改之Member");
-
+  public R updateMember(@RequestBody @Valid MemberUpdateVo vo) {
     Member member = new Member();
     BeanUtils.copyProperties(vo, member);
     memberService.updateMember(member);

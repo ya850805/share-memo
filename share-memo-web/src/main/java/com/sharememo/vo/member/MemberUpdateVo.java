@@ -2,9 +2,11 @@ package com.sharememo.vo.member;
 
 import lombok.Data;
 
+import javax.validation.constraints.NotNull;
+
 @Data
 public class MemberUpdateVo {
-  private Integer id;
+  @NotNull(message = "請選擇欲修改之Member") private Integer id;
 
   private String name;
 
