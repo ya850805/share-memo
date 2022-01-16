@@ -19,7 +19,6 @@ import org.springframework.stereotype.Component;
 
 import java.time.LocalDate;
 import java.util.List;
-import java.util.Objects;
 import java.util.concurrent.ExecutionException;
 import java.util.stream.Collectors;
 
@@ -37,9 +36,8 @@ public class ShareMemoTasks {
   @Value("${spring.mail.username}")
   private String sender;
 
-  //TODO send daily email and Line message
+  // TODO send daily email and Line message
   /** Send daily notifications at 00:00. */
-  //  @Scheduled(cron = "45 * * * * *")
   //  @Scheduled(cron = "* * 0 * * *")
   public void sendDailyNotification() {
     log.info("Execute Daily Tasks!!!");
@@ -57,11 +55,22 @@ public class ShareMemoTasks {
         if (StringUtils.isNotBlank(member.getLineId())) {
           lineMessagingClient.pushMessage(
               new PushMessage(
-                  member.getLineId(), new TextMessage(notification.getContent()), true));
+                  member.getLineId(),
+                  new TextMessage(
+                      "【" + notification.getSubject() + "】：" + notification.getContent()),
+                  true));
+        }
+
+        // Send Email
+        if (StringUtils.isNotBlank(member.getEmail())) {
+          SimpleMailMessage message = new SimpleMailMessage();
+          message.setFrom(sender);
+          message.setTo(member.getEmail());
+          message.setSubject(notification.getSubject());
+          message.setText(notification.getContent());
+          javaMailSender.send(message);
         }
       }
-
-      // TODO Send notification email.
     }
   }
 
