@@ -74,7 +74,7 @@ public class ShareMemoTasks {
     }
   }
 
-  @Scheduled(cron = "* * 9 * * *")
+//  @Scheduled(cron = "* * 9 * * *")
   public void sendLineMorningGreeting() {
     List<Member> members = memberService.findAllMembers();
     members.forEach(
