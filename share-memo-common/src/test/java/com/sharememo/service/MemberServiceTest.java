@@ -4,14 +4,13 @@ import com.sharememo.entity.Member;
 import com.sharememo.mapper.MemberMapper;
 import com.sharememo.service.impl.MemberServiceImpl;
 import org.junit.Test;
+import org.junit.jupiter.api.Assertions;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.junit.MockitoJUnitRunner;
 import org.springframework.boot.test.context.SpringBootTest;
-
-import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 @RunWith(MockitoJUnitRunner.class)
 @SpringBootTest
@@ -25,6 +24,14 @@ public class MemberServiceTest {
     Member member = new Member();
     Mockito.when(memberMapper.selectByPrimaryKey(id)).thenReturn(member);
 
-    assertNotNull(memberServiceImpl.getById(id));
+    Assertions.assertNotNull(memberServiceImpl.getById(id));
+  }
+
+  @Test
+  public void createMember_anyMember_happenedOnce() {
+    Member createdMember = new Member();
+    memberServiceImpl.createMember(createdMember);
+
+    Mockito.verify(memberMapper, Mockito.times(1)).create(createdMember);
   }
 }
