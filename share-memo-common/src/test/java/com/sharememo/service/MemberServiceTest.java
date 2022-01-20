@@ -2,7 +2,6 @@ package com.sharememo.service;
 
 import com.sharememo.entity.Member;
 import com.sharememo.mapper.MemberMapper;
-import com.sharememo.mapper.MemberNotificationMapper;
 import com.sharememo.service.impl.MemberServiceImpl;
 import org.junit.Test;
 import org.junit.jupiter.api.Assertions;
