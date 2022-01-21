@@ -36,6 +36,7 @@ public class NotificationServiceTest {
     notificationServiceImpl.deleteNotification(id);
 
     Mockito.verify(notificationMapper, Mockito.times(1)).delete(id);
+    Mockito.verify(memberNotificationService, Mockito.times(1)).deleteByNotificationId(id);
   }
 
   @Test
