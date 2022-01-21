@@ -24,7 +24,7 @@ public class MemberServiceTest {
 
 
   @Test
-  public void getById_id1_NotNull() {
+  public void getById_Id1_NotNull() {
     Integer id = 1;
     Member member = new Member();
     Mockito.when(memberMapper.selectByPrimaryKey(id)).thenReturn(member);
@@ -33,7 +33,7 @@ public class MemberServiceTest {
   }
 
   @Test
-  public void createMember_anyMember_happenedOnce() {
+  public void createMember_AnyMember_HappenedOnce() {
     Member createdMember = new Member();
     memberServiceImpl.createMember(createdMember);
 
@@ -41,14 +41,14 @@ public class MemberServiceTest {
   }
 
   @Test
-  public void findAllMembers_anyMembers_happenedOnce() {
+  public void findAllMembers_AnyMembers_HappenedOnce() {
     memberServiceImpl.findAllMembers();
 
     Mockito.verify(memberMapper, Mockito.times(1)).findAll();
   }
 
   @Test
-  public void deleteById_id1_happenedOnce() {
+  public void deleteById_Id1_HappenedOnce() {
     Integer id = 1;
     memberServiceImpl.deleteById(id);
 
@@ -57,7 +57,7 @@ public class MemberServiceTest {
   }
 
   @Test
-  public void deleteByIds_listSizeIs5_happened5Times() {
+  public void deleteByIds_ListSizeIs5_Happened5Times() {
     List<Integer> ids = Arrays.asList(1, 2, 3, 4, 5);
     memberServiceImpl.deleteByIds(ids);
 
@@ -74,7 +74,7 @@ public class MemberServiceTest {
   }
 
   @Test
-  public void updateMember_anyMember_happenedOnce() {
+  public void updateMember_AnyMember_HappenedOnce() {
     Member updatedMember = new Member();
     memberServiceImpl.updateMember(updatedMember);
 
