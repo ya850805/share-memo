@@ -6,7 +6,8 @@ import java.util.HashMap;
 
 /**
  * @author Jason
- *     <p>Return object
+ *
+ * Custom return object.
  */
 public class R extends HashMap<String, Object> {
 
