@@ -22,7 +22,10 @@ import java.util.List;
 import java.util.concurrent.ExecutionException;
 import java.util.stream.Collectors;
 
-/** @author Jason */
+/**
+ * @author Jason
+ *     <p>Share-memo tasks
+ */
 @Slf4j
 @Component
 public class ShareMemoTasks {
@@ -74,7 +77,8 @@ public class ShareMemoTasks {
     }
   }
 
-//  @Scheduled(cron = "* * 9 * * *")
+  /** Morning greeting tasks */
+  //  @Scheduled(cron = "* * 9 * * *")
   public void sendLineMorningGreeting() {
     List<Member> members = memberService.findAllMembers();
     members.forEach(
