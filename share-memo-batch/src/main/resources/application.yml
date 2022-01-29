@@ -13,6 +13,10 @@ spring:
           starttls:
             enabled: true
             required: true
+  quartz:
+    jdbc:
+      initialize-schema: always
+    job-store-type: jdbc
 
 #server:
 #  port: 8501
