@@ -7,8 +7,8 @@ import java.time.LocalDateTime;
 import lombok.Data;
 
 /**
- * notification
- * @author 
+ * Notification for simple scheduler.
+ * @author Jason
  */
 @Data
 public class Notification implements Serializable {
