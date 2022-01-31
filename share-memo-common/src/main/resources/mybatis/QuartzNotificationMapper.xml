@@ -21,7 +21,7 @@
         INSERT INTO quartz_notification (job_name, job_group, subject, content, cron, create_timestamp, create_user,
                                          update_timestamp,
                                          update_user)
-        VALUES (#{jobName}, #{jobGroup}, ${subject}, #{content}, #{cron}, #{createTimestamp}, #{createUser},
+        VALUES (#{jobName}, #{jobGroup}, #{subject}, #{content}, #{cron}, #{createTimestamp}, #{createUser},
                 #{updateTimestamp},
                 #{updateUser})
     </insert>
