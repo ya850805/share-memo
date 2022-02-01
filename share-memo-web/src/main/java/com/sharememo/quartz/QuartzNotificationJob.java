@@ -10,6 +10,7 @@ public class QuartzNotificationJob extends QuartzJobBean {
   @Override
   protected void executeInternal(JobExecutionContext jobExecutionContext)
       throws JobExecutionException {
+    //TODO Execute real job.
     System.out.println("test!!!!");
   }
 }

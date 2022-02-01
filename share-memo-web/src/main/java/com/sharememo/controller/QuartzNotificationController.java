@@ -27,6 +27,7 @@ public class QuartzNotificationController {
     BeanUtils.copyProperties(vo, quartzNotification);
     quartzNotification.setCron(DateUtil.parseCron(vo.getCron()));
 
+    //TODO Add transaction.
     quartzNotificationService.create(quartzNotification);
     startJob(quartzNotification);
     return R.ok();
