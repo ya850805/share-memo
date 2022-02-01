@@ -6,6 +6,7 @@ import com.sharememo.mapper.QuartzNotificationMapper;
 import com.sharememo.service.QuartzNotificationService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDateTime;
 
@@ -14,6 +15,7 @@ public class QuartzNotificationServiceImpl implements QuartzNotificationService 
   @Autowired private QuartzNotificationMapper quartzNotificationMapper;
 
   @Override
+  @Transactional
   public void create(QuartzNotification quartzNotification) {
     quartzNotification.setCreateTimestamp(
         LocalDateTime.now().format(ShareMemoConstant.DATE_TIME_FORMATTER));

@@ -2,6 +2,7 @@ package com.sharememo.controller;
 
 import com.sharememo.entity.QuartzNotification;
 import com.sharememo.service.QuartzNotificationService;
+import com.sharememo.util.DateUtil;
 import com.sharememo.vo.R;
 import com.sharememo.vo.quartzNotification.QuartzNotificationCreateVo;
 import org.springframework.beans.BeanUtils;
@@ -18,6 +19,7 @@ public class QuartzNotificationController {
   public R createQuartzNotification(@RequestBody QuartzNotificationCreateVo vo) {
     QuartzNotification quartzNotification = new QuartzNotification();
     BeanUtils.copyProperties(vo, quartzNotification);
+    quartzNotification.setCron(DateUtil.parseCron(vo.getCron()));
 
     quartzNotificationService.create(quartzNotification);
     return R.ok();
