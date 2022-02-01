@@ -7,7 +7,6 @@ import org.springframework.beans.factory.config.PropertiesFactoryBean;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.core.io.ClassPathResource;
-import org.springframework.scheduling.quartz.SchedulerFactoryBean;
 
 import java.io.IOException;
 import java.util.Properties;
@@ -25,11 +24,12 @@ public class QuartzConfig {
   }
 
   @Bean
-  public SchedulerFactoryBean schedulerFactoryBean() throws IOException {
-    SchedulerFactoryBean schedulerFactoryBean = new SchedulerFactoryBean();
-    schedulerFactoryBean.setJobFactory(jobFactory);
-    schedulerFactoryBean.setQuartzProperties(quartzProperties());
-    return schedulerFactoryBean;
+  public SchedulerFactoryBeanWithWait schedulerFactoryBeanWithWait() throws IOException {
+    SchedulerFactoryBeanWithWait factory = new SchedulerFactoryBeanWithWait();
+    factory.setJobFactory(jobFactory);
+    factory.setWaitForJobsToCompleteOnShutdown(true);
+    factory.setQuartzProperties(quartzProperties());
+    return factory;
   }
 
   @Bean
@@ -39,6 +39,6 @@ public class QuartzConfig {
 
   @Bean
   public Scheduler scheduler() throws IOException {
-    return schedulerFactoryBean().getScheduler();
+    return schedulerFactoryBeanWithWait().getScheduler();
   }
 }

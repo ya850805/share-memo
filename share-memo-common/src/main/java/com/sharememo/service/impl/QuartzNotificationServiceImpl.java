@@ -4,12 +4,14 @@ import com.sharememo.constant.ShareMemoConstant;
 import com.sharememo.entity.QuartzNotification;
 import com.sharememo.mapper.QuartzNotificationMapper;
 import com.sharememo.service.QuartzNotificationService;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDateTime;
 
+@Slf4j
 @Service
 public class QuartzNotificationServiceImpl implements QuartzNotificationService {
   @Autowired private QuartzNotificationMapper quartzNotificationMapper;
@@ -25,4 +27,5 @@ public class QuartzNotificationServiceImpl implements QuartzNotificationService 
     quartzNotification.setUpdateUser(ShareMemoConstant.SYS_USER);
     quartzNotificationMapper.create(quartzNotification);
   }
+
 }
