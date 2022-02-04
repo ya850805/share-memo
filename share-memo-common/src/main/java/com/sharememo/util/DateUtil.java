@@ -5,6 +5,11 @@ import org.apache.commons.lang3.StringUtils;
 import java.time.LocalDateTime;
 
 public class DateUtil {
+  /**
+   * LocalDateTime to cron expression.
+   * @param localDateTime localDateTime
+   * @return cron expression
+   */
   public static String parseCron(LocalDateTime localDateTime) {
     StringBuffer sb = new StringBuffer();
     sb.append(fill(localDateTime.getSecond())).append(StringUtils.SPACE); // second
@@ -17,6 +22,11 @@ public class DateUtil {
     return sb.toString();
   }
 
+  /**
+   * Fill time to 2-digit.
+   * @param time original time fr
+   * @return 2-digit String
+   */
   private static String fill(int time) {
     if (time < 10) {
       return "0" + time;
