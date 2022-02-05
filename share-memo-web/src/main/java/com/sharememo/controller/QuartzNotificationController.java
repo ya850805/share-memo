@@ -32,7 +32,7 @@ public class QuartzNotificationController {
     return R.ok();
   }
 
-  private R startJob(QuartzNotification quartzNotification) {
+  R startJob(QuartzNotification quartzNotification) {
     JobDataMap jobDataMap = new JobDataMap();
     jobDataMap.put("key", "value");
 

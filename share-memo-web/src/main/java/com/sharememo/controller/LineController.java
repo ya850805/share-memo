@@ -27,8 +27,12 @@ public class LineController {
   @Autowired
   private MemberService memberService;
 
+  @Autowired
+  private QuartzNotificationController quartzNotificationController;
+
   @EventMapping
   public TextMessage handleTextMessageEvent(MessageEvent<TextMessageContent> event) {
+    //TODO Handle the request that adding quartz notification by line message.
     return new TextMessage("🤖: " + event.getMessage().getText());
   }
 
