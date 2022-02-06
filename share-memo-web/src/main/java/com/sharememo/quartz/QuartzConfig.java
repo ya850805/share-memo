@@ -11,6 +11,9 @@ import org.springframework.core.io.ClassPathResource;
 import java.io.IOException;
 import java.util.Properties;
 
+/**
+ * quartz config class.
+ */
 @Configuration
 public class QuartzConfig {
   @Autowired private JobFactory jobFactory;
@@ -41,4 +44,5 @@ public class QuartzConfig {
   public Scheduler scheduler() throws IOException {
     return schedulerFactoryBeanWithWait().getScheduler();
   }
+
 }
