@@ -10,6 +10,7 @@ import com.linecorp.bot.model.profile.UserProfileResponse;
 import com.linecorp.bot.spring.boot.annotation.EventMapping;
 import com.linecorp.bot.spring.boot.annotation.LineMessageHandler;
 import com.sharememo.entity.Member;
+import com.sharememo.service.LineMessageService;
 import com.sharememo.service.MemberService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -30,10 +31,12 @@ public class LineController {
   @Autowired
   private QuartzNotificationController quartzNotificationController;
 
+  @Autowired
+  private LineMessageService lineMessageService;
+
   @EventMapping
   public TextMessage handleTextMessageEvent(MessageEvent<TextMessageContent> event) {
-    //TODO Handle the request that adding quartz notification by line message.
-    return new TextMessage("🤖: " + event.getMessage().getText());
+    return new TextMessage("🤖: " + lineMessageService.handlePlainTextMessage(event.getMessage().getText()));
   }
 
   @EventMapping
