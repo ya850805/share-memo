@@ -36,7 +36,7 @@ public class LineController {
 
   @EventMapping
   public TextMessage handleTextMessageEvent(MessageEvent<TextMessageContent> event) {
-    return new TextMessage("🤖: " + lineMessageService.handlePlainTextMessage(event.getMessage().getText()));
+    return new TextMessage(lineMessageService.handlePlainTextMessage(event.getMessage().getText()));
   }
 
   @EventMapping
