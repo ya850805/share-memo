@@ -1,6 +1,7 @@
 package com.sharememo.controller;
 
 import com.sharememo.entity.QuartzNotification;
+import com.sharememo.exception.ShareMemoException;
 import com.sharememo.quartz.QuartzNotificationJob;
 import com.sharememo.quartz.TriggerComponent;
 import com.sharememo.service.QuartzNotificationService;
@@ -11,6 +12,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.quartz.*;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
@@ -32,7 +34,7 @@ public class QuartzNotificationController {
     return R.ok();
   }
 
-  R startJob(QuartzNotification quartzNotification) {
+  void startJob(QuartzNotification quartzNotification) {
     JobDataMap jobDataMap = new JobDataMap();
     jobDataMap.put("key", "value");
 
@@ -44,11 +46,9 @@ public class QuartzNotificationController {
 
     try {
       scheduler.scheduleJob(jobDetail, trigger);
-      return R.ok();
     } catch (SchedulerException e) {
       log.error(e.getMessage());
+      throw new ShareMemoException(HttpStatus.INTERNAL_SERVER_ERROR.value(), e.getMessage());
     }
-
-    return R.error();
   }
 }
