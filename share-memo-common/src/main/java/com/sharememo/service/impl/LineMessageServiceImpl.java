@@ -24,7 +24,6 @@ public class LineMessageServiceImpl implements LineMessageService {
 
   @Override
   public String handlePlainTextMessage(String text) {
-    // TODO Handle the request that adding quartz notification by line message.
     if (StringUtils.EMPTY.equals(text.trim())) {
       return StringUtils.EMPTY;
     } else if (ShareMemoConstant.LINE_BOT_QUESTION.equals(text)) {
@@ -41,8 +40,9 @@ public class LineMessageServiceImpl implements LineMessageService {
       String content = text.substring(24);
 
       QuartzNotification quartzNotification = new QuartzNotification();
-      quartzNotification.setJobName("jobName");
-      quartzNotification.setJobGroup("jobGroup");
+      //TODO Random jobName & jobGroup
+      quartzNotification.setJobName("jobName3");
+      quartzNotification.setJobGroup("jobGroup3");
       quartzNotification.setSubject(content);
       quartzNotification.setContent(content);
       quartzNotification.setCron(DateUtil.parseCron(noticeTimestamp));
@@ -55,9 +55,11 @@ public class LineMessageServiceImpl implements LineMessageService {
     }
   }
 
+  //TODO send with member_quartz_notification
   private void startJob(QuartzNotification quartzNotification) {
     JobDataMap jobDataMap = new JobDataMap();
-    jobDataMap.put("key", "value");
+    //TODO put lineId
+    jobDataMap.put("content", quartzNotification.getContent());
 
     JobKey jobKey =
         JobKey.jobKey(quartzNotification.getJobName(), quartzNotification.getJobGroup());

@@ -34,6 +34,7 @@ public class QuartzNotificationController {
     return R.ok();
   }
 
+  //TODO send with member_quartz_notification
   void startJob(QuartzNotification quartzNotification) {
     JobDataMap jobDataMap = new JobDataMap();
     jobDataMap.put("key", "value");
