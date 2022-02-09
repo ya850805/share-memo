@@ -9,6 +9,7 @@ import com.sharememo.service.LineMessageService;
 import com.sharememo.service.QuartzNotificationService;
 import com.sharememo.util.DateUtil;
 import lombok.extern.slf4j.Slf4j;
+import org.apache.commons.lang3.RandomStringUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.quartz.*;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -40,9 +41,8 @@ public class LineMessageServiceImpl implements LineMessageService {
       String content = text.substring(24);
 
       QuartzNotification quartzNotification = new QuartzNotification();
-      //TODO Random jobName & jobGroup
-      quartzNotification.setJobName("jobName3");
-      quartzNotification.setJobGroup("jobGroup3");
+      quartzNotification.setJobName(RandomStringUtils.random(10, true, false));
+      quartzNotification.setJobGroup(ShareMemoConstant.DEFAULT_JOB_GROUP);
       quartzNotification.setSubject(content);
       quartzNotification.setContent(content);
       quartzNotification.setCron(DateUtil.parseCron(noticeTimestamp));

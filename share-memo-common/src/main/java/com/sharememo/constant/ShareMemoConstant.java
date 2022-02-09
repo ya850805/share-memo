@@ -12,6 +12,7 @@ public class ShareMemoConstant {
   public static final DateTimeFormatter DATE_TIME_FORMATTER =
       DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
   public static final DateTimeFormatter DATE_FORMATTER = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+  public static final String DEFAULT_JOB_GROUP = "ShareMemo JobGroup";
 
   /*********************Line Constant**************************/
   public static final String LINE_BOT_QUESTION = "?";
