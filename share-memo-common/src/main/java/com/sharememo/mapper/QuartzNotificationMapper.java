@@ -5,5 +5,5 @@ import org.apache.ibatis.annotations.Mapper;
 
 @Mapper
 public interface QuartzNotificationMapper {
-  void create(QuartzNotification quartzNotification);
+  Integer create(QuartzNotification quartzNotification);
 }

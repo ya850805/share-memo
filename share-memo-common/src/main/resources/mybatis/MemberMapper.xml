@@ -63,4 +63,12 @@
         </set>
         WHERE id = #{id}
     </update>
+
+    <select id="selectByLineId" resultType="com.sharememo.entity.Member">
+        SELECT
+        <include refid="Base_Column_List"/>
+        FROM member
+        WHERE line_id = #{lineId}
+    </select>
+
 </mapper>

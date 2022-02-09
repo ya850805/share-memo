@@ -1,6 +1,8 @@
 package com.sharememo.entity;
 
 import java.io.Serializable;
+import java.time.LocalDateTime;
+
 import lombok.Data;
 
 /**
@@ -21,11 +23,11 @@ public class QuartzNotification implements Serializable {
 
     private String cron;
 
-    private String createTimestamp;
+    private LocalDateTime createTimestamp;
 
     private String createUser;
 
-    private String updateTimestamp;
+    private LocalDateTime updateTimestamp;
 
     private String updateUser;
 

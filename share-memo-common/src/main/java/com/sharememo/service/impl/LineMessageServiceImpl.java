@@ -6,6 +6,7 @@ import com.sharememo.exception.ShareMemoException;
 import com.sharememo.quartz.QuartzNotificationJob;
 import com.sharememo.quartz.TriggerComponent;
 import com.sharememo.service.LineMessageService;
+import com.sharememo.service.MemberService;
 import com.sharememo.service.QuartzNotificationService;
 import com.sharememo.util.DateUtil;
 import lombok.extern.slf4j.Slf4j;
@@ -16,15 +17,19 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
+import java.util.Arrays;
+import java.util.List;
 
 @Slf4j
 @Service
 public class LineMessageServiceImpl implements LineMessageService {
   @Autowired private QuartzNotificationService quartzNotificationService;
+  @Autowired private MemberService memberService;
   @Autowired private Scheduler scheduler;
 
+  //TODO Add transaction
   @Override
-  public String handlePlainTextMessage(String text) {
+  public String handlePlainTextMessage(String text, String senderLineId) {
     if (StringUtils.EMPTY.equals(text.trim())) {
       return StringUtils.EMPTY;
     } else if (ShareMemoConstant.LINE_BOT_QUESTION.equals(text)) {
@@ -36,6 +41,7 @@ public class LineMessageServiceImpl implements LineMessageService {
 
       return sb.toString();
     } else if (text.startsWith(ShareMemoConstant.LINE_BOT_REMIND_ME)) {
+      //TODO check the quartz is after now or not.
       LocalDateTime noticeTimestamp =
           LocalDateTime.parse(text.substring(4, 23), ShareMemoConstant.DATE_TIME_FORMATTER);
       String content = text.substring(24);
@@ -47,19 +53,20 @@ public class LineMessageServiceImpl implements LineMessageService {
       quartzNotification.setContent(content);
       quartzNotification.setCron(DateUtil.parseCron(noticeTimestamp));
 
-      startJob(quartzNotification); // If error occurs, then the data will not insert.
-      quartzNotificationService.create(quartzNotification);
+      List<Integer> memberId = Arrays.asList(memberService.getByLineId(senderLineId).getId());
+
+      startJob(quartzNotification, memberId); // If error occurs, then the data will not insert.
+      quartzNotificationService.create(quartzNotification, memberId);
       return ShareMemoConstant.LINE_BOT_ACCEPT_COMMAND;
     } else {
       return ShareMemoConstant.LINE_BOT_DEFAULT_RESPONSE;
     }
   }
 
-  //TODO send with member_quartz_notification
-  private void startJob(QuartzNotification quartzNotification) {
+  private void startJob(QuartzNotification quartzNotification, List<Integer> memberIds) {
     JobDataMap jobDataMap = new JobDataMap();
-    //TODO put lineId
-    jobDataMap.put("content", quartzNotification.getContent());
+    jobDataMap.put(ShareMemoConstant.JOB_DATA_MAP_KEY_CONTENT, quartzNotification.getContent());
+    jobDataMap.put(ShareMemoConstant.JOB_DATA_MAP_KEY_IDS, memberIds);
 
     JobKey jobKey =
         JobKey.jobKey(quartzNotification.getJobName(), quartzNotification.getJobGroup());

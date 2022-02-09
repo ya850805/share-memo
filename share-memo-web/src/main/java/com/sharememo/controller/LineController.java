@@ -22,21 +22,19 @@ import java.util.concurrent.ExecutionException;
 @LineMessageHandler
 public class LineController {
 
-  @Autowired
-  private LineMessagingClient lineMessagingClient;
+  @Autowired private LineMessagingClient lineMessagingClient;
 
-  @Autowired
-  private MemberService memberService;
+  @Autowired private MemberService memberService;
 
-  @Autowired
-  private QuartzNotificationController quartzNotificationController;
+  @Autowired private QuartzNotificationController quartzNotificationController;
 
-  @Autowired
-  private LineMessageService lineMessageService;
+  @Autowired private LineMessageService lineMessageService;
 
   @EventMapping
   public TextMessage handleTextMessageEvent(MessageEvent<TextMessageContent> event) {
-    return new TextMessage(lineMessageService.handlePlainTextMessage(event.getMessage().getText()));
+    return new TextMessage(
+        lineMessageService.handlePlainTextMessage(
+            event.getMessage().getText(), event.getSource().getUserId()));
   }
 
   @EventMapping
@@ -59,11 +57,11 @@ public class LineController {
 
   /**
    * Line default messages.
+   *
    * @param event event
    */
   @EventMapping
   public void handleDefaultMessageEvent(Event event) {
     log.info("event: {}", event);
   }
-
 }

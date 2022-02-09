@@ -13,4 +13,5 @@ public interface MemberMapper {
   void deleteByPrimaryKey(Integer id);
   void deleteByLineId(String lineId);
   void updateMember(Member member);
+  Member selectByLineId(String lineId);
 }

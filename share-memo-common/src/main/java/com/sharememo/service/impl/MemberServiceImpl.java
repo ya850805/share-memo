@@ -64,4 +64,9 @@ public class MemberServiceImpl implements MemberService {
     member.setUpdateUser(ShareMemoConstant.SYS_USER);
     memberMapper.updateMember(member);
   }
+
+  @Override
+  public Member getByLineId(String lineId) {
+    return memberMapper.selectByLineId(lineId);
+  }
 }

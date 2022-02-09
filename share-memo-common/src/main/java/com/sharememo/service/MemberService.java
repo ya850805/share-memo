@@ -19,4 +19,6 @@ public interface MemberService {
   void deleteByLineId(String lineId);
 
   void updateMember(Member member);
+
+  Member getByLineId(String lineId);
 }
