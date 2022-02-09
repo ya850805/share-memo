@@ -1,9 +1,10 @@
 USE `share-memo`;
 
 DROP TABLE IF EXISTS member_notification;
-DROP TABLE IF EXISTS member;
+DROP TABLE IF EXISTS quartz_member_notification;
 DROP TABLE IF EXISTS notification;
 DROP TABLE IF EXISTS quartz_notification;
+DROP TABLE IF EXISTS member;
 
 CREATE TABLE member
 (
@@ -55,4 +56,18 @@ CREATE TABLE quartz_notification
     create_user      varchar(20),
     update_timestamp varchar(30),
     update_user      varchar(20)
+);
+
+CREATE TABLE quartz_member_notification
+(
+    member_id        int(6) NOT NULL,
+    quartz_notification_id  int(6) NOT NULL,
+    isSend           varchar(1) NOT NULL,
+    create_timestamp varchar(30),
+    create_user      varchar(20),
+    update_timestamp varchar(30),
+    update_user      varchar(20),
+    PRIMARY KEY (member_id, quartz_notification_id),
+    FOREIGN KEY (member_id) REFERENCES member (id),
+    FOREIGN KEY (quartz_notification_id) REFERENCES quartz_notification (id)
 );
