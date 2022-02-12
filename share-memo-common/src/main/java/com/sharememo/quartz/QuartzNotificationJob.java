@@ -36,7 +36,8 @@ public class QuartzNotificationJob extends QuartzJobBean {
     String lineId = memberService.getById(memberIds.get(0)).getLineId();
 
     //TODO update "isSend" attribute
-//test
+    //test1234
+
     lineMessagingClient.pushMessage(new PushMessage(lineId, new TextMessage(text), true));
   }
 }
