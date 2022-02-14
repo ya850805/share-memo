@@ -26,4 +26,5 @@ public class ShareMemoConstant {
 
   public static final String LINE_BOT_ACCEPT_COMMAND = "我收到指令了！";
   public static final String LINE_BOT_DEFAULT_RESPONSE = "我不請楚你在說什麼...";
+  public static final String LINE_NOT_MESSAGE_ERROR = "輸入的內容有誤";
 }

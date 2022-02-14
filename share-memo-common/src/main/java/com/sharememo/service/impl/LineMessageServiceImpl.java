@@ -41,9 +41,13 @@ public class LineMessageServiceImpl implements LineMessageService {
 
       return sb.toString();
     } else if (text.startsWith(ShareMemoConstant.LINE_BOT_REMIND_ME)) {
-      //TODO check the quartz is after now or not.
       LocalDateTime noticeTimestamp =
           LocalDateTime.parse(text.substring(4, 23), ShareMemoConstant.DATE_TIME_FORMATTER);
+
+      if(LocalDateTime.now().isAfter(noticeTimestamp) || LocalDateTime.now().isEqual(noticeTimestamp)) {
+        return ShareMemoConstant.LINE_NOT_MESSAGE_ERROR;
+      }
+
       String content = text.substring(24);
 
       QuartzNotification quartzNotification = new QuartzNotification();
