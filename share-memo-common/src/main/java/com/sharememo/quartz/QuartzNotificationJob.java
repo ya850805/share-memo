@@ -5,6 +5,7 @@ import com.linecorp.bot.model.PushMessage;
 import com.linecorp.bot.model.message.TextMessage;
 import com.sharememo.constant.ShareMemoConstant;
 import com.sharememo.service.MemberService;
+import com.sharememo.service.QuartzMemberNotificationService;
 import lombok.extern.slf4j.Slf4j;
 import org.quartz.DisallowConcurrentExecution;
 import org.quartz.JobExecutionContext;
@@ -19,6 +20,7 @@ import java.util.List;
 public class QuartzNotificationJob extends QuartzJobBean {
   @Autowired private LineMessagingClient lineMessagingClient;
   @Autowired private MemberService memberService;
+  @Autowired private QuartzMemberNotificationService quartzMemberNotificationService;
 
   @Override
   protected void executeInternal(JobExecutionContext jobExecutionContext)
@@ -35,7 +37,13 @@ public class QuartzNotificationJob extends QuartzJobBean {
             jobExecutionContext.getMergedJobDataMap().get(ShareMemoConstant.JOB_DATA_MAP_KEY_IDS);
     String lineId = memberService.getById(memberIds.get(0)).getLineId();
 
-    //TODO update "isSend" attribute
+    // TODO update "isSend" attribute
+    quartzMemberNotificationService.updateIsSend(
+        (Integer)
+            jobExecutionContext
+                .getMergedJobDataMap()
+                .get(ShareMemoConstant.JOB_DATA_MAP_KEY_NOTIFICATION_ID),
+        memberIds.get(0));
 
     lineMessagingClient.pushMessage(new PushMessage(lineId, new TextMessage(text), true));
   }

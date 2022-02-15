@@ -59,8 +59,8 @@ public class LineMessageServiceImpl implements LineMessageService {
 
       List<Integer> memberId = Arrays.asList(memberService.getByLineId(senderLineId).getId());
 
-      startJob(quartzNotification, memberId); // If error occurs, then the data will not insert.
       quartzNotificationService.create(quartzNotification, memberId);
+      startJob(quartzNotification, memberId);
       return ShareMemoConstant.LINE_BOT_ACCEPT_COMMAND;
     } else {
       return ShareMemoConstant.LINE_BOT_DEFAULT_RESPONSE;
@@ -71,6 +71,7 @@ public class LineMessageServiceImpl implements LineMessageService {
     JobDataMap jobDataMap = new JobDataMap();
     jobDataMap.put(ShareMemoConstant.JOB_DATA_MAP_KEY_CONTENT, quartzNotification.getContent());
     jobDataMap.put(ShareMemoConstant.JOB_DATA_MAP_KEY_IDS, memberIds);
+    jobDataMap.put(ShareMemoConstant.JOB_DATA_MAP_KEY_NOTIFICATION_ID, quartzNotification.getId());
 
     JobKey jobKey =
         JobKey.jobKey(quartzNotification.getJobName(), quartzNotification.getJobGroup());
