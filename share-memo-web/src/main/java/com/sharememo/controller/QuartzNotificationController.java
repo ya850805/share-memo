@@ -32,9 +32,9 @@ public class QuartzNotificationController {
     BeanUtils.copyProperties(vo, quartzNotification);
     quartzNotification.setCron(DateUtil.parseCron(vo.getCron()));
 
-    startJob(
-        quartzNotification, vo.getMemberIds()); // If error occurs, then the data will not insert.
     quartzNotificationService.create(quartzNotification, vo.getMemberIds());
+    startJob(
+        quartzNotification, vo.getMemberIds());
     return R.ok();
   }
 
