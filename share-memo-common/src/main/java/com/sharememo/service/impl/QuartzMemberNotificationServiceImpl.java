@@ -33,4 +33,9 @@ public class QuartzMemberNotificationServiceImpl implements QuartzMemberNotifica
     return quartzMemberNotificationMapper.findByQuartzNotificationIdAndMemberId(
         quartzNotificationId, memberId);
   }
+
+  @Override
+  public void updateIsSend(Integer quartzNotificationId, Integer memberId) {
+    quartzMemberNotificationMapper.updateIsSend(quartzNotificationId, memberId);
+  }
 }

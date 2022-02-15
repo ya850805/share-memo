@@ -7,4 +7,5 @@ import org.apache.ibatis.annotations.Mapper;
 public interface QuartzMemberNotificationMapper {
   void create(QuartzMemberNotification quartzMemberNotification);
   QuartzMemberNotification findByQuartzNotificationIdAndMemberId(Integer quartzNotificationId, Integer memberId);
+  void updateIsSend(Integer quartzNotificationId, Integer memberId);
 }
