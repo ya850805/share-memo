@@ -37,7 +37,6 @@ public class QuartzNotificationJob extends QuartzJobBean {
             jobExecutionContext.getMergedJobDataMap().get(ShareMemoConstant.JOB_DATA_MAP_KEY_IDS);
     String lineId = memberService.getById(memberIds.get(0)).getLineId();
 
-    // TODO update "isSend" attribute
     quartzMemberNotificationService.updateIsSend(
         (Integer)
             jobExecutionContext
