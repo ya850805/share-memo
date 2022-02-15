@@ -26,4 +26,11 @@ public class QuartzMemberNotificationServiceImpl implements QuartzMemberNotifica
     quartzMemberNotification.setUpdateUser(ShareMemoConstant.SYS_USER);
     quartzMemberNotificationMapper.create(quartzMemberNotification);
   }
+
+  @Override
+  public QuartzMemberNotification findByQuartzNotificationIdAndMemberId(
+      Integer quartzNotificationId, Integer memberId) {
+    return quartzMemberNotificationMapper.findByQuartzNotificationIdAndMemberId(
+        quartzNotificationId, memberId);
+  }
 }

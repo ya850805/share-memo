@@ -21,4 +21,9 @@
                 #{updateUser})
     </insert>
 
+    <select id="findByQuartzNotificationIdAndMemberId"
+            resultType="com.sharememo.entity.QuartzMemberNotification">
+        SELECT * FROM quartz_member_notification WHERE member_id = #{memberId} AND quartz_notification_id = #{quartzNotificationId};
+    </select>
+
 </mapper>
