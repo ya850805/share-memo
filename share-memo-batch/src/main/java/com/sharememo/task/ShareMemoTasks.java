@@ -39,9 +39,8 @@ public class ShareMemoTasks {
   @Value("${spring.mail.username}")
   private String sender;
 
-  // TODO send daily email and Line message
   /** Send daily notifications at 00:00. */
-  //  @Scheduled(cron = "* * 0 * * *")
+  @Scheduled(cron = "* * 0 * * *")
   public void sendDailyNotification() {
     log.info("Execute Daily Tasks!!!");
     List<Notification> notifications = notificationService.findByNotificationDate(LocalDate.now());
