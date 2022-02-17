@@ -15,6 +15,7 @@ import org.apache.commons.lang3.StringUtils;
 import org.quartz.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDateTime;
 import java.util.Arrays;
@@ -27,8 +28,8 @@ public class LineMessageServiceImpl implements LineMessageService {
   @Autowired private MemberService memberService;
   @Autowired private Scheduler scheduler;
 
-  //TODO Add transaction
   @Override
+  @Transactional
   public String handlePlainTextMessage(String text, String senderLineId) {
     if (StringUtils.EMPTY.equals(text.trim())) {
       return StringUtils.EMPTY;
