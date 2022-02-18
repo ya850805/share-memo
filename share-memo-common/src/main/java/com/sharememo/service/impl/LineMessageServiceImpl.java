@@ -28,6 +28,12 @@ public class LineMessageServiceImpl implements LineMessageService {
   @Autowired private MemberService memberService;
   @Autowired private Scheduler scheduler;
 
+  /**
+   * Handle line bot received plan text message.
+   * @param text Send text.
+   * @param senderLineId Sender's line id.
+   * @return Line bot response.
+   */
   @Override
   @Transactional
   public String handlePlainTextMessage(String text, String senderLineId) {
