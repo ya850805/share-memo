@@ -32,7 +32,7 @@ public class LineMessageServiceImpl implements LineMessageService {
    * Handle line bot received plan text message.
    * @param text Send text.
    * @param senderLineId Sender's line id.
-   * @return Line bot response.
+   * @return Line bot response text.
    */
   @Override
   @Transactional
