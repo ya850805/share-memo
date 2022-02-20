@@ -23,9 +23,7 @@ public class QuartzNotificationJob extends QuartzJobBean {
   @Autowired private QuartzMemberNotificationService quartzMemberNotificationService;
 
   @Override
-  protected void executeInternal(JobExecutionContext jobExecutionContext)
-      throws JobExecutionException {
-    // TODO Execute real job.
+  protected void executeInternal(JobExecutionContext jobExecutionContext) {
     log.info("Execute quartz job");
     String text =
         (String)
