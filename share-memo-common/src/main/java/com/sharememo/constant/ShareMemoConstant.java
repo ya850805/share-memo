@@ -22,8 +22,25 @@ public class ShareMemoConstant {
 
   public static final String LINE_BOT_COMMAND = "!指令";
   public static final String LINE_BOT_RESPONSE_QUESTION = "輸入「" + LINE_BOT_COMMAND + "」，查看我支援的指令！";
+
+  /** Add line notification*/
   public static final String LINE_BOT_REMIND_ME = "提醒我：";
   public static final String LINE_BOT_COMMAND_ONE = "1. 新增定時提醒：「" + LINE_BOT_REMIND_ME + "yyyy-MM-dd HH:mm:ss 內容」";
+
+  //TODO Show not list
+  /** Show note*/
+  public static final String LINE_BOT_NOTE = "筆記本";
+  public static final String LINE_BOT_COMMAND_TWO = "2. " + LINE_BOT_NOTE;
+
+  //TODO Insert note
+  /** Insert note*/
+  public static final String LINE_BOT_INSERT_NOTE = "新增筆記：";
+  public static final String LINE_BOT_COMMAND_THREE = "3. " + LINE_BOT_INSERT_NOTE;
+
+  //TODO delete note
+  /** Delete note*/
+  public static final String LINE_BOT_DELETE_NOTE = "刪除筆記：";
+  public static final String LINE_BOT_COMMAND_FOUR = "4. " + LINE_BOT_DELETE_NOTE;
 
   public static final String LINE_BOT_ACCEPT_COMMAND = "我收到指令了！";
   public static final String LINE_BOT_DEFAULT_RESPONSE = "我不請楚你在說什麼...";

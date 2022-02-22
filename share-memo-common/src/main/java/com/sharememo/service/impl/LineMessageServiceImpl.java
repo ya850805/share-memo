@@ -45,6 +45,12 @@ public class LineMessageServiceImpl implements LineMessageService {
       StringBuilder sb = new StringBuilder();
       sb.append(ShareMemoConstant.LINE_BOT_COMMAND_ONE);
       sb.append(StringUtils.LF);
+      sb.append(ShareMemoConstant.LINE_BOT_COMMAND_TWO);
+      sb.append(StringUtils.LF);
+      sb.append(ShareMemoConstant.LINE_BOT_COMMAND_THREE);
+      sb.append(StringUtils.LF);
+      sb.append(ShareMemoConstant.LINE_BOT_COMMAND_FOUR);
+      sb.append(StringUtils.LF);
 
       return sb.toString();
     } else if (text.startsWith(ShareMemoConstant.LINE_BOT_REMIND_ME)) {
