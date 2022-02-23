@@ -14,6 +14,7 @@ import org.apache.commons.lang3.RandomStringUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.quartz.*;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -27,6 +28,7 @@ public class LineMessageServiceImpl implements LineMessageService {
   @Autowired private QuartzNotificationService quartzNotificationService;
   @Autowired private MemberService memberService;
   @Autowired private Scheduler scheduler;
+  @Autowired private RedisTemplate redisTemplate;
 
   /**
    * Handle line bot received plan text message.
@@ -76,6 +78,7 @@ public class LineMessageServiceImpl implements LineMessageService {
       startJob(quartzNotification, memberId);
       return ShareMemoConstant.LINE_BOT_ACCEPT_COMMAND;
     } else {
+      redisTemplate.opsForList().rightPushAll("key", text);
       return ShareMemoConstant.LINE_BOT_DEFAULT_RESPONSE;
     }
   }

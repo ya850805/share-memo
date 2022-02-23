@@ -26,6 +26,7 @@ logging:
     com:
       sharememo:
         mapper: debug
+
 ---
 spring:
   config:
