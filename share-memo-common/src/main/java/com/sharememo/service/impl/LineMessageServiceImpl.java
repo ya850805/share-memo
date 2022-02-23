@@ -15,6 +15,7 @@ import org.apache.commons.lang3.StringUtils;
 import org.quartz.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.RedisTemplate;
+import org.springframework.data.redis.core.StringRedisTemplate;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -28,10 +29,11 @@ public class LineMessageServiceImpl implements LineMessageService {
   @Autowired private QuartzNotificationService quartzNotificationService;
   @Autowired private MemberService memberService;
   @Autowired private Scheduler scheduler;
-  @Autowired private RedisTemplate redisTemplate;
+  @Autowired private StringRedisTemplate stringRedisTemplate;
 
   /**
    * Handle line bot received plan text message.
+   *
    * @param text Send text.
    * @param senderLineId Sender's line id.
    * @return Line bot response text.
@@ -59,7 +61,8 @@ public class LineMessageServiceImpl implements LineMessageService {
       LocalDateTime noticeTimestamp =
           LocalDateTime.parse(text.substring(4, 23), ShareMemoConstant.DATE_TIME_FORMATTER);
 
-      if(LocalDateTime.now().isAfter(noticeTimestamp) || LocalDateTime.now().isEqual(noticeTimestamp)) {
+      if (LocalDateTime.now().isAfter(noticeTimestamp)
+          || LocalDateTime.now().isEqual(noticeTimestamp)) {
         return ShareMemoConstant.LINE_NOT_MESSAGE_ERROR;
       }
 
@@ -77,8 +80,14 @@ public class LineMessageServiceImpl implements LineMessageService {
       quartzNotificationService.create(quartzNotification, memberId);
       startJob(quartzNotification, memberId);
       return ShareMemoConstant.LINE_BOT_ACCEPT_COMMAND;
+    } else if (text.startsWith(ShareMemoConstant.LINE_BOT_INSERT_NOTE)) { // insert note
+      stringRedisTemplate
+          .opsForList()
+          .rightPush(
+              ShareMemoConstant.LINE_BOT_NOTE_REDIS_KEY,
+              text.substring(ShareMemoConstant.LINE_BOT_INSERT_NOTE.length()));
+      return ShareMemoConstant.LINE_BOT_ACCEPT_COMMAND;
     } else {
-      redisTemplate.opsForList().rightPushAll("key", text);
       return ShareMemoConstant.LINE_BOT_DEFAULT_RESPONSE;
     }
   }
