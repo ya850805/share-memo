@@ -28,7 +28,6 @@ public class ShareMemoConstant {
   public static final String LINE_BOT_REMIND_ME = "提醒我：";
   public static final String LINE_BOT_COMMAND_ONE = "1. 新增定時提醒：「" + LINE_BOT_REMIND_ME + "yyyy-MM-dd HH:mm:ss 內容」";
 
-  //TODO Show note list
   /** Show note*/
   public static final String LINE_BOT_NOTE = "筆記本";
   public static final String LINE_BOT_COMMAND_TWO = "2. " + LINE_BOT_NOTE;
