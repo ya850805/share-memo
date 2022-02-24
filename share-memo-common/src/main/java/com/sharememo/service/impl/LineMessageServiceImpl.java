@@ -14,7 +14,6 @@ import org.apache.commons.lang3.RandomStringUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.quartz.*;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.data.redis.core.StringRedisTemplate;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -87,6 +86,18 @@ public class LineMessageServiceImpl implements LineMessageService {
               ShareMemoConstant.LINE_BOT_NOTE_REDIS_KEY,
               text.substring(ShareMemoConstant.LINE_BOT_INSERT_NOTE.length()));
       return ShareMemoConstant.LINE_BOT_ACCEPT_COMMAND;
+    } else if (ShareMemoConstant.LINE_BOT_NOTE.equals(text)) {
+      long size = stringRedisTemplate.opsForList().size(ShareMemoConstant.LINE_BOT_NOTE_REDIS_KEY);
+
+      StringBuilder sb = new StringBuilder();
+      List<String> notes =
+          stringRedisTemplate
+              .opsForList()
+              .range(ShareMemoConstant.LINE_BOT_NOTE_REDIS_KEY, 0, (int) (size - 1));
+      for (int i = 0; i < notes.size(); i++) {
+        sb.append(i + 1).append(". ").append(notes.get(i)).append(StringUtils.LF);
+      }
+      return sb.toString();
     } else {
       return ShareMemoConstant.LINE_BOT_DEFAULT_RESPONSE;
     }
