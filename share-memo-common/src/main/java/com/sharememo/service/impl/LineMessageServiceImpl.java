@@ -86,7 +86,7 @@ public class LineMessageServiceImpl implements LineMessageService {
               ShareMemoConstant.LINE_BOT_NOTE_REDIS_KEY,
               text.substring(ShareMemoConstant.LINE_BOT_INSERT_NOTE.length()));
       return ShareMemoConstant.LINE_BOT_ACCEPT_COMMAND;
-    } else if (ShareMemoConstant.LINE_BOT_NOTE.equals(text)) {
+    } else if (ShareMemoConstant.LINE_BOT_NOTE.equals(text)) { //show all note
       long size = stringRedisTemplate.opsForList().size(ShareMemoConstant.LINE_BOT_NOTE_REDIS_KEY);
 
       StringBuilder sb = new StringBuilder();
