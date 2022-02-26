@@ -97,6 +97,24 @@ public class LineMessageServiceImpl implements LineMessageService {
         sb.append(i + 1).append(". ").append(notes.get(i)).append(StringUtils.LF);
       }
       return sb.toString();
+    } else if (text.startsWith(ShareMemoConstant.LINE_BOT_DELETE_NOTE)) {
+      Integer id;
+      try {
+        id = Integer.valueOf(text.substring(ShareMemoConstant.LINE_BOT_DELETE_NOTE.length()));
+      } catch (NumberFormatException nfe) {
+        return ShareMemoConstant.LINE_NOT_MESSAGE_ERROR;
+      }
+      long size = stringRedisTemplate.opsForList().size(ShareMemoConstant.LINE_BOT_NOTE_REDIS_KEY);
+      List<String> notes =
+          stringRedisTemplate
+              .opsForList()
+              .range(ShareMemoConstant.LINE_BOT_NOTE_REDIS_KEY, 0, size - 1);
+      String deleted = notes.get(id - 1);
+
+      stringRedisTemplate
+          .opsForList()
+          .remove(ShareMemoConstant.LINE_BOT_NOTE_REDIS_KEY, 1, deleted);
+      return ShareMemoConstant.LINE_BOT_ACCEPT_COMMAND;
     } else {
       return ShareMemoConstant.LINE_BOT_DEFAULT_RESPONSE;
     }
