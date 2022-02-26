@@ -80,13 +80,12 @@ public class LineMessageServiceImpl implements LineMessageService {
       startJob(quartzNotification, memberId);
       return ShareMemoConstant.LINE_BOT_ACCEPT_COMMAND;
     } else if (text.startsWith(ShareMemoConstant.LINE_BOT_INSERT_NOTE)) { // insert note
-      stringRedisTemplate
-          .opsForList()
-          .rightPush(
-              ShareMemoConstant.LINE_BOT_NOTE_REDIS_KEY,
-              text.substring(ShareMemoConstant.LINE_BOT_INSERT_NOTE.length()));
+      String note = text.substring(ShareMemoConstant.LINE_BOT_INSERT_NOTE.length());
+      if (StringUtils.isBlank(note)) return ShareMemoConstant.LINE_NOT_MESSAGE_ERROR;
+
+      stringRedisTemplate.opsForList().rightPush(ShareMemoConstant.LINE_BOT_NOTE_REDIS_KEY, note);
       return ShareMemoConstant.LINE_BOT_ACCEPT_COMMAND;
-    } else if (ShareMemoConstant.LINE_BOT_NOTE.equals(text)) { //show all note
+    } else if (ShareMemoConstant.LINE_BOT_NOTE.equals(text)) { // show all note
       long size = stringRedisTemplate.opsForList().size(ShareMemoConstant.LINE_BOT_NOTE_REDIS_KEY);
 
       StringBuilder sb = new StringBuilder();
