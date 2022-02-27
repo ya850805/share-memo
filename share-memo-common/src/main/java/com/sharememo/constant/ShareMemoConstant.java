@@ -36,7 +36,6 @@ public class ShareMemoConstant {
   public static final String LINE_BOT_INSERT_NOTE = "新增筆記：";
   public static final String LINE_BOT_COMMAND_THREE = "3. " + LINE_BOT_INSERT_NOTE;
 
-  //TODO delete note
   /** Delete note*/
   public static final String LINE_BOT_DELETE_NOTE = "刪除筆記：";
   public static final String LINE_BOT_COMMAND_FOUR = "4. " + LINE_BOT_DELETE_NOTE;
