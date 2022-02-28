@@ -97,7 +97,7 @@ public class LineMessageServiceImpl implements LineMessageService {
         sb.append(i + 1).append(". ").append(notes.get(i)).append(StringUtils.LF);
       }
       return sb.toString();
-    } else if (text.startsWith(ShareMemoConstant.LINE_BOT_DELETE_NOTE)) {
+    } else if (text.startsWith(ShareMemoConstant.LINE_BOT_DELETE_NOTE)) { // delete note
       Integer id;
       try {
         id = Integer.valueOf(text.substring(ShareMemoConstant.LINE_BOT_DELETE_NOTE.length()));
