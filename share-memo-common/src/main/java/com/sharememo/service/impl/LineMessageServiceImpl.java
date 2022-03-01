@@ -44,7 +44,7 @@ public class LineMessageServiceImpl implements LineMessageService {
       return StringUtils.EMPTY;
     } else if (ShareMemoConstant.LINE_BOT_QUESTION.equals(text)) {
       return ShareMemoConstant.LINE_BOT_RESPONSE_QUESTION;
-    } else if (ShareMemoConstant.LINE_BOT_COMMAND.equals(text)) {
+    } else if (ShareMemoConstant.LINE_BOT_COMMAND.equals(text)) { //show all line bot commands
       StringBuilder sb = new StringBuilder();
       sb.append(ShareMemoConstant.LINE_BOT_COMMAND_ONE);
       sb.append(StringUtils.LF);
