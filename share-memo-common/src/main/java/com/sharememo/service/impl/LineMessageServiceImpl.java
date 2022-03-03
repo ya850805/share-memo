@@ -56,7 +56,7 @@ public class LineMessageServiceImpl implements LineMessageService {
       sb.append(StringUtils.LF);
 
       return sb.toString();
-    } else if (text.startsWith(ShareMemoConstant.LINE_BOT_REMIND_ME)) {
+    } else if (text.startsWith(ShareMemoConstant.LINE_BOT_REMIND_ME)) { //line bot add quartz
       LocalDateTime noticeTimestamp =
           LocalDateTime.parse(text.substring(4, 23), ShareMemoConstant.DATE_TIME_FORMATTER);
 
