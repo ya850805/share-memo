@@ -115,7 +115,7 @@ public class LineMessageServiceImpl implements LineMessageService {
           .opsForList()
           .remove(ShareMemoConstant.LINE_BOT_NOTE_REDIS_KEY, 1, deleted);
       return ShareMemoConstant.LINE_BOT_ACCEPT_COMMAND;
-    } else {
+    } else { //default message.
       return ShareMemoConstant.LINE_BOT_DEFAULT_RESPONSE;
     }
   }
