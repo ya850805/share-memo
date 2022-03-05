@@ -40,7 +40,7 @@ public class LineMessageServiceImpl implements LineMessageService {
   @Override
   @Transactional
   public String handlePlainTextMessage(String text, String senderLineId) {
-    if (StringUtils.EMPTY.equals(text.trim())) {
+    if (StringUtils.EMPTY.equals(text.trim())) { //validate the text
       return StringUtils.EMPTY;
     } else if (ShareMemoConstant.LINE_BOT_QUESTION.equals(text)) { //show the first commands.
       return ShareMemoConstant.LINE_BOT_RESPONSE_QUESTION;
