@@ -18,7 +18,7 @@ public class ShareMemoConstant {
   public static final String JOB_DATA_MAP_KEY_NOTIFICATION_ID = "notificationId";
   public static final String LINE_BOT_NOTE_REDIS_KEY = "SHARE_NOTE";
 
-  /*********************Line Constant**************************/
+  /*********************Line bot commands constant**************************/
   public static final String LINE_BOT_QUESTION = "?";
 
   public static final String LINE_BOT_COMMAND = "!指令";
