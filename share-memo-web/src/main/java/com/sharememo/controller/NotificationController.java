@@ -8,13 +8,15 @@ import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
+
 /** @author Jason */
 @RestController
 public class NotificationController {
   @Autowired private NotificationService notificationService;
 
   @PostMapping("/notification")
-  public R createNotification(@RequestBody NotificationCreateVo vo) {
+  public R createNotification(@RequestBody @Valid NotificationCreateVo vo) {
     Notification notification = new Notification();
     BeanUtils.copyProperties(vo, notification);
 
