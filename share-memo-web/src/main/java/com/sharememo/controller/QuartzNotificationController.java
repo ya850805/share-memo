@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import javax.validation.Valid;
 import java.util.List;
 
 @Slf4j
@@ -27,7 +28,7 @@ public class QuartzNotificationController {
   @Autowired private Scheduler scheduler;
 
   @PostMapping("/quartz-notification")
-  public R createQuartzNotification(@RequestBody QuartzNotificationCreateVo vo) {
+  public R createQuartzNotification(@RequestBody @Valid QuartzNotificationCreateVo vo) {
     QuartzNotification quartzNotification = new QuartzNotification();
     BeanUtils.copyProperties(vo, quartzNotification);
     quartzNotification.setCron(DateUtil.parseCron(vo.getCron()));
