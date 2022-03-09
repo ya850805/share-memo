@@ -10,6 +10,8 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import javax.validation.Valid;
+
 /** @author Jason */
 @RestController
 public class MemberNotificationController {
@@ -17,7 +19,7 @@ public class MemberNotificationController {
   private MemberNotificationService memberNotificationService;
 
   @PostMapping("/member-notification")
-  public R createMemberNotification(@RequestBody MemberNotificationCreateVo vo) {
+  public R createMemberNotification(@RequestBody @Valid MemberNotificationCreateVo vo) {
     MemberNotification memberNotification = new MemberNotification();
     BeanUtils.copyProperties(vo, memberNotification);
     memberNotificationService.createMemberNotification(memberNotification);
