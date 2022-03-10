@@ -13,15 +13,18 @@ import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import javax.validation.constraints.Min;
+import javax.validation.constraints.NotNull;
 import java.util.List;
 
 /** @author Jason */
+@Validated
 @RestController
 public class MemberController {
   @Autowired private MemberService memberService;
 
   @GetMapping("/member")
-  public Member getById(@RequestParam("id") Integer id) {
+  public Member getById(@RequestParam("id") @Min(value = 1, message = "memberId最小為1") Integer id) {
     return memberService.getById(id);
   }
 
