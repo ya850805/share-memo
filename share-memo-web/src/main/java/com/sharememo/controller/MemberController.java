@@ -28,6 +28,7 @@ public class MemberController {
     return memberService.getById(id);
   }
 
+  //TODO Add JSR303 validation.
   @PostMapping("/member")
   public R createMember(@RequestBody MemberCreateVo vo) {
     Member member = new Member();
