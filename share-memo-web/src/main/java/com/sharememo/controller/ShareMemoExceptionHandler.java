@@ -7,6 +7,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
+import javax.validation.ConstraintViolationException;
 
 /**
  * @author Jason
@@ -34,6 +35,11 @@ public class ShareMemoExceptionHandler {
   @ExceptionHandler(MethodArgumentNotValidException.class)
   public R handleMethodArgumentNotValidException(MethodArgumentNotValidException e) {
     return new R(HttpStatus.INTERNAL_SERVER_ERROR.value(), e.getFieldError().getDefaultMessage());
+  }
+
+  @ExceptionHandler(ConstraintViolationException.class)
+  public R handleConstraintViolationException(ConstraintViolationException e) {
+    return new R(HttpStatus.INTERNAL_SERVER_ERROR.value(), e.getLocalizedMessage());
   }
 
   /**
