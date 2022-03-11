@@ -30,7 +30,7 @@ public class MemberController {
 
   //TODO Add JSR303 validation.
   @PostMapping("/member")
-  public R createMember(@RequestBody MemberCreateVo vo) {
+  public R createMember(@RequestBody @Valid MemberCreateVo vo) {
     Member member = new Member();
     BeanUtils.copyProperties(vo, member);
 
