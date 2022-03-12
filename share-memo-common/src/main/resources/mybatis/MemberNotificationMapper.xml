@@ -41,4 +41,11 @@
         WHERE notification_id = #{notificationId}
     </select>
 
+    <update id="updateIsSend">
+        UPDATE member_notification
+        SET isSend = 'Y'
+        WHERE member_id = #{memberId}
+          AND notification_id = #{notificationId}
+    </update>
+
 </mapper>

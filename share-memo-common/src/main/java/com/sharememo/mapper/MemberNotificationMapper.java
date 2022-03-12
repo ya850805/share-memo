@@ -11,4 +11,5 @@ public interface MemberNotificationMapper {
     void deleteByMemberId(Integer memberId);
     void deleteByNotificationId(Integer notificationId);
     List<Integer> findMemberIdsByNotificationId(Integer notificationId);
+    void updateIsSend(Integer notificationId, Integer memberId);
 }
