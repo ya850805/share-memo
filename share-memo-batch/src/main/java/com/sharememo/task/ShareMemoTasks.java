@@ -16,6 +16,7 @@ import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDate;
 import java.util.List;
@@ -41,6 +42,7 @@ public class ShareMemoTasks {
 
   /** Send daily notifications at 00:00. */
   @Scheduled(cron = "* * 0 * * *")
+  @Transactional
   public void sendDailyNotification() {
     log.info("Execute Daily Tasks!!!");
     List<Notification> notifications = notificationService.findByNotificationDate(LocalDate.now());
@@ -72,6 +74,9 @@ public class ShareMemoTasks {
           message.setText(notification.getContent());
           javaMailSender.send(message);
         }
+
+        // update isSend
+        memberNotificationService.updateIsSend(notification.getId(), member.getId());
       }
     }
   }
