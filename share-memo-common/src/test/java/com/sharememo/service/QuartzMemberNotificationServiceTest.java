@@ -25,4 +25,15 @@ public class QuartzMemberNotificationServiceTest {
         .create(quartzMemberNotification);
     Assert.assertEquals(quartzMemberNotification.getIsSend(), YNEnum.N.name());
   }
+
+  @Test
+  public void findByQuartzNotificationIdAndMemberId_AnyParameter_HappenedOnce() {
+    Integer quartzNotificationId = Mockito.anyInt();
+    Integer memberId = Mockito.anyInt();
+
+    quartzMemberNotificationService.findByQuartzNotificationIdAndMemberId(
+        quartzNotificationId, memberId);
+    Mockito.verify(quartzMemberNotificationMapper, Mockito.times(1))
+        .findByQuartzNotificationIdAndMemberId(quartzNotificationId, memberId);
+  }
 }
