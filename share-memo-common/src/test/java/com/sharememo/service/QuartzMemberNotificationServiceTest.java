@@ -36,4 +36,14 @@ public class QuartzMemberNotificationServiceTest {
     Mockito.verify(quartzMemberNotificationMapper, Mockito.times(1))
         .findByQuartzNotificationIdAndMemberId(quartzNotificationId, memberId);
   }
+
+  @Test
+  public void updateIsSend_AnyParameter_HappenedOnce() {
+    Integer quartzNotificationId = Mockito.anyInt();
+    Integer memberId = Mockito.anyInt();
+
+    quartzMemberNotificationService.updateIsSend(quartzNotificationId, memberId);
+    Mockito.verify(quartzMemberNotificationMapper, Mockito.times(1))
+        .updateIsSend(quartzNotificationId, memberId);
+  }
 }
