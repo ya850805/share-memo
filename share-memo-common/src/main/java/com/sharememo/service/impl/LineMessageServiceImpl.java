@@ -39,6 +39,7 @@ public class LineMessageServiceImpl implements LineMessageService {
    */
   @Override
   @Transactional
+  //TODO handle find all quartz_notification request and delete quartz_notification request.
   public String handlePlainTextMessage(String text, String senderLineId) {
     if (StringUtils.EMPTY.equals(text.trim())) { //validate the text
       return StringUtils.EMPTY;
