@@ -17,7 +17,8 @@
         id, job_name, job_group, subject, content, cron, create_timestamp, create_user, update_timestamp,
     update_user
     </sql>
-    <insert id="create" parameterType="com.sharememo.entity.QuartzNotification" useGeneratedKeys="true" keyProperty="id">
+    <insert id="create" parameterType="com.sharememo.entity.QuartzNotification" useGeneratedKeys="true"
+            keyProperty="id">
         INSERT INTO quartz_notification (job_name, job_group, subject, content, cron, create_timestamp, create_user,
                                          update_timestamp,
                                          update_user)
@@ -25,4 +26,10 @@
                 #{updateTimestamp},
                 #{updateUser})
     </insert>
+
+    <select id="findById" resultType="com.sharememo.entity.QuartzNotification">
+        SELECT *
+        FROM quartz_notification
+        WHERE id = #{id}
+    </select>
 </mapper>

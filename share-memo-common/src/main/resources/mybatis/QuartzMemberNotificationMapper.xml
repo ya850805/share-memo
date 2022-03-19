@@ -26,14 +26,20 @@
         SELECT *
         FROM quartz_member_notification
         WHERE member_id = #{memberId}
-          AND quartz_notification_id = #{quartzNotificationId};
+          AND quartz_notification_id = #{quartzNotificationId}
     </select>
 
     <update id="updateIsSend">
         UPDATE quartz_member_notification
         SET isSend = 'Y'
         WHERE member_id = #{memberId}
-          AND quartz_notification_id = #{quartzNotificationId};
+          AND quartz_notification_id = #{quartzNotificationId}
     </update>
+
+    <select id="findAllActiveNotificationId" resultType="java.lang.Integer">
+        SELECT DISTINCT(quartz_notification_id)
+        FROM quartz_member_notification
+        WHERE isSend = 'N'
+    </select>
 
 </mapper>
