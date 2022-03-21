@@ -23,6 +23,7 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
 
+//TODO Add unit test.
 @Slf4j
 @Service
 public class LineMessageServiceImpl implements LineMessageService {
@@ -40,7 +41,7 @@ public class LineMessageServiceImpl implements LineMessageService {
    */
   @Override
   @Transactional
-  // TODO handle find all quartz_notification request and delete quartz_notification request.
+  // TODO handle delete quartz_notification request.
   public String handlePlainTextMessage(String text, String senderLineId) {
     if (StringUtils.EMPTY.equals(text.trim())) { // validate the text
       return StringUtils.EMPTY;
