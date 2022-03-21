@@ -21,6 +21,7 @@ import org.springframework.transaction.annotation.Transactional;
 import java.time.LocalDateTime;
 import java.util.Arrays;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Slf4j
 @Service
@@ -39,13 +40,13 @@ public class LineMessageServiceImpl implements LineMessageService {
    */
   @Override
   @Transactional
-  //TODO handle find all quartz_notification request and delete quartz_notification request.
+  // TODO handle find all quartz_notification request and delete quartz_notification request.
   public String handlePlainTextMessage(String text, String senderLineId) {
-    if (StringUtils.EMPTY.equals(text.trim())) { //validate the text
+    if (StringUtils.EMPTY.equals(text.trim())) { // validate the text
       return StringUtils.EMPTY;
-    } else if (ShareMemoConstant.LINE_BOT_QUESTION.equals(text)) { //show the first commands.
+    } else if (ShareMemoConstant.LINE_BOT_QUESTION.equals(text)) { // show the first commands.
       return ShareMemoConstant.LINE_BOT_RESPONSE_QUESTION;
-    } else if (ShareMemoConstant.LINE_BOT_COMMAND.equals(text)) { //show all line bot commands
+    } else if (ShareMemoConstant.LINE_BOT_COMMAND.equals(text)) { // show all line bot commands
       StringBuilder sb = new StringBuilder();
       sb.append(ShareMemoConstant.LINE_BOT_COMMAND_ONE);
       sb.append(StringUtils.LF);
@@ -55,9 +56,11 @@ public class LineMessageServiceImpl implements LineMessageService {
       sb.append(StringUtils.LF);
       sb.append(ShareMemoConstant.LINE_BOT_COMMAND_FOUR);
       sb.append(StringUtils.LF);
+      sb.append(ShareMemoConstant.LINE_BOT_COMMAND_FIVE);
+      sb.append(StringUtils.LF);
 
       return sb.toString();
-    } else if (text.startsWith(ShareMemoConstant.LINE_BOT_REMIND_ME)) { //line bot add quartz
+    } else if (text.startsWith(ShareMemoConstant.LINE_BOT_REMIND_ME)) { // line bot add quartz
       LocalDateTime noticeTimestamp =
           LocalDateTime.parse(text.substring(4, 23), ShareMemoConstant.DATE_TIME_FORMATTER);
 
@@ -116,7 +119,13 @@ public class LineMessageServiceImpl implements LineMessageService {
           .opsForList()
           .remove(ShareMemoConstant.LINE_BOT_NOTE_REDIS_KEY, 1, deleted);
       return ShareMemoConstant.LINE_BOT_ACCEPT_COMMAND;
-    } else { //default message.
+    } else if (text.equals(ShareMemoConstant.LINE_BOT_ALL_NOTI)) {
+      List<String> contents =
+          quartzNotificationService.findAllActive().stream()
+              .map(n -> n.getContent())
+              .collect(Collectors.toList());
+      return StringUtils.join(contents, " | ");
+    } else { // default message.
       return ShareMemoConstant.LINE_BOT_DEFAULT_RESPONSE;
     }
   }

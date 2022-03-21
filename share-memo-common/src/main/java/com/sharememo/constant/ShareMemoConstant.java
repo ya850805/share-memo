@@ -40,6 +40,9 @@ public class ShareMemoConstant {
   public static final String LINE_BOT_DELETE_NOTE = "刪除筆記：";
   public static final String LINE_BOT_COMMAND_FOUR = "4. " + LINE_BOT_DELETE_NOTE;
 
+  public static final String LINE_BOT_ALL_NOTI = "所有提醒";
+  public static final String LINE_BOT_COMMAND_FIVE = "5. " + LINE_BOT_ALL_NOTI;
+
   public static final String LINE_BOT_ACCEPT_COMMAND = "我收到指令了！";
   public static final String LINE_BOT_DEFAULT_RESPONSE = "我不請楚你在說什麼...";
   public static final String LINE_NOT_MESSAGE_ERROR = "輸入的內容有誤";
