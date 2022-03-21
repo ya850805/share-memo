@@ -120,7 +120,7 @@ public class LineMessageServiceImpl implements LineMessageService {
           .opsForList()
           .remove(ShareMemoConstant.LINE_BOT_NOTE_REDIS_KEY, 1, deleted);
       return ShareMemoConstant.LINE_BOT_ACCEPT_COMMAND;
-    } else if (text.equals(ShareMemoConstant.LINE_BOT_ALL_NOTI)) {
+    } else if (text.equals(ShareMemoConstant.LINE_BOT_ALL_NOTI)) { //show all active QuartzNotification
       List<String> contents =
           quartzNotificationService.findAllActive().stream()
               .map(n -> n.getContent())
