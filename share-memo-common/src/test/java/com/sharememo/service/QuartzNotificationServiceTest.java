@@ -42,4 +42,14 @@ public class QuartzNotificationServiceTest {
 
     Mockito.verify(quartzNotificationMapper, Mockito.times(3)).findById(Mockito.anyInt());
   }
+
+  @Test
+  public void delete_AnyQuartzNotificationId_HappenedOnce() {
+    Integer quartzNotificationId = Mockito.anyInt();
+    quartzNotificationService.delete(quartzNotificationId);
+
+    Mockito.verify(quartzNotificationMapper, Mockito.times(1)).delete(quartzNotificationId);
+    Mockito.verify(quartzMemberNotificationMapper, Mockito.times(1))
+        .deleteByQuartzNotificationId(quartzNotificationId);
+  }
 }
