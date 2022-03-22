@@ -42,4 +42,10 @@
         WHERE isSend = 'N'
     </select>
 
+    <delete id="deleteByQuartzNotificationId">
+        DELETE
+        FROM quartz_member_notification
+        WHERE quartz_notification_id = #{quartzNotificationId}
+    </delete>
+
 </mapper>

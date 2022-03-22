@@ -12,4 +12,5 @@ public interface QuartzNotificationService {
     List<QuartzNotification> findAllActive();
 
     //TODO delete quartz_notification
+    void delete(Integer id);
 }

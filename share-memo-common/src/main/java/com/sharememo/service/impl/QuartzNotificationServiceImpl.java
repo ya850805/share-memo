@@ -48,4 +48,11 @@ public class QuartzNotificationServiceImpl implements QuartzNotificationService 
         .map(id -> quartzNotificationMapper.findById(id))
         .collect(Collectors.toList());
   }
+
+  @Override
+  @Transactional
+  public void delete(Integer id) {
+    quartzNotificationMapper.delete(id);
+    quartzMemberNotificationMapper.deleteByQuartzNotificationId(id);
+  }
 }

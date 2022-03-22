@@ -32,4 +32,11 @@
         FROM quartz_notification
         WHERE id = #{id}
     </select>
+
+    <delete id="delete">
+        DELETE
+        FROM quartz_notification
+        WHERE id = #{id}
+    </delete>
+
 </mapper>

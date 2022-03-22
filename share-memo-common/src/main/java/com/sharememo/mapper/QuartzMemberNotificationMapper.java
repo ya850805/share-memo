@@ -11,4 +11,5 @@ public interface QuartzMemberNotificationMapper {
   QuartzMemberNotification findByQuartzNotificationIdAndMemberId(Integer quartzNotificationId, Integer memberId);
   void updateIsSend(Integer quartzNotificationId, Integer memberId);
   List<Integer> findAllActiveNotificationId();
+  void deleteByQuartzNotificationId(Integer quartzNotificationId);
 }
