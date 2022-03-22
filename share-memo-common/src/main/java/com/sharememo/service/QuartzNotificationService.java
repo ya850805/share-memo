@@ -11,6 +11,6 @@ public interface QuartzNotificationService {
     //Find all quartz_notification that haven't send.
     List<QuartzNotification> findAllActive();
 
-    //TODO delete quartz_notification
+    //TODO use this method.
     void delete(Integer id);
 }
