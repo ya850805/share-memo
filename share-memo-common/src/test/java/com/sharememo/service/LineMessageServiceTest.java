@@ -35,4 +35,10 @@ public class LineMessageServiceTest {
     Assert.assertEquals(text, ShareMemoConstant.LINE_BOT_RESPONSE_QUESTION);
 
   }
+
+  @Test
+  public void handlePlainTextMessage_ShowAllLineBotCommand_ReturnNotEmpty() {
+    String text = lineMessageService.handlePlainTextMessage(ShareMemoConstant.LINE_BOT_COMMAND, SENDER_LINE_ID);
+    Assert.assertNotEquals(StringUtils.EMPTY, text);
+  }
 }
