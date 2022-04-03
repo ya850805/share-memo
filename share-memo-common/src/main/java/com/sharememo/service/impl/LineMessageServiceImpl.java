@@ -23,7 +23,6 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
 
-//TODO Add unit test.
 @Slf4j
 @Service
 public class LineMessageServiceImpl implements LineMessageService {
