@@ -73,4 +73,14 @@ public class LineMessageServiceTest {
     Mockito.verify(mock, Mockito.times(1))
         .rightPush(ShareMemoConstant.LINE_BOT_NOTE_REDIS_KEY, note);
   }
+
+  @Test
+  public void handlePlainTextMessage_ShowAllNote_HappenedOnce() {
+    ListOperations mock = Mockito.mock(ListOperations.class);
+    Mockito.when(stringRedisTemplate.opsForList()).thenReturn(mock);
+
+    lineMessageService.handlePlainTextMessage(ShareMemoConstant.LINE_BOT_NOTE, SENDER_LINE_ID);
+
+    Mockito.verify(mock, Mockito.times(1)).range(ShareMemoConstant.LINE_BOT_NOTE_REDIS_KEY, 0, -1);
+  }
 }
