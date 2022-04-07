@@ -14,6 +14,9 @@ import org.quartz.Scheduler;
 import org.springframework.data.redis.core.ListOperations;
 import org.springframework.data.redis.core.StringRedisTemplate;
 
+import java.util.ArrayList;
+import java.util.List;
+
 @RunWith(MockitoJUnitRunner.class)
 public class LineMessageServiceTest {
   @InjectMocks private LineMessageServiceImpl lineMessageService;
@@ -82,5 +85,32 @@ public class LineMessageServiceTest {
     lineMessageService.handlePlainTextMessage(ShareMemoConstant.LINE_BOT_NOTE, SENDER_LINE_ID);
 
     Mockito.verify(mock, Mockito.times(1)).range(ShareMemoConstant.LINE_BOT_NOTE_REDIS_KEY, 0, -1);
+  }
+
+  @Test
+  public void handlePlainTextMessage_DeleteNote_ReturnErrorMessage() {
+    String deleteId = "A";
+    String returnMessage = lineMessageService.handlePlainTextMessage(ShareMemoConstant.LINE_BOT_DELETE_NOTE + deleteId, SENDER_LINE_ID);
+
+    Assert.assertEquals(returnMessage,  ShareMemoConstant.LINE_NOT_MESSAGE_ERROR);
+  }
+
+  @Test
+  public void handlePlainTextMessage_DeleteNote_HappenedOnce() {
+    Integer deleteId = 1;
+    ListOperations mock = Mockito.mock(ListOperations.class);
+    List<String> notes = new ArrayList<>();
+    notes.add("note1");
+    notes.add("note2");
+    notes.add("note3");
+    notes.add("note4");
+    notes.add("note5");
+
+    Mockito.when(stringRedisTemplate.opsForList()).thenReturn(mock);
+    Mockito.when(mock.size(ShareMemoConstant.LINE_BOT_NOTE_REDIS_KEY)).thenReturn(5L);
+    Mockito.when(mock.range(ShareMemoConstant.LINE_BOT_NOTE_REDIS_KEY, 0, 4L)).thenReturn(notes);
+
+    lineMessageService.handlePlainTextMessage(ShareMemoConstant.LINE_BOT_DELETE_NOTE + deleteId, SENDER_LINE_ID);
+    Mockito.verify(mock, Mockito.times(1)).remove(Mockito.any(), Mockito.anyLong(), Mockito.any());
   }
 }
