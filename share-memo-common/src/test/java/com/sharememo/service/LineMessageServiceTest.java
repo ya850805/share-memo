@@ -113,4 +113,13 @@ public class LineMessageServiceTest {
     lineMessageService.handlePlainTextMessage(ShareMemoConstant.LINE_BOT_DELETE_NOTE + deleteId, SENDER_LINE_ID);
     Mockito.verify(mock, Mockito.times(1)).remove(Mockito.any(), Mockito.anyLong(), Mockito.any());
   }
+
+  @Test
+  public void handlePlainTextMessage_NotKeyWord_ReturnDefaultMessage() {
+    String notKeyWord = "#$%^&";
+    String senderId = "1";
+    String message = lineMessageService.handlePlainTextMessage(notKeyWord, senderId);
+
+    Assert.assertEquals(message, ShareMemoConstant.LINE_BOT_DEFAULT_RESPONSE);
+  }
 }
