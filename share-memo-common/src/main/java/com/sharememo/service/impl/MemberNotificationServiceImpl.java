@@ -46,6 +46,11 @@ public class MemberNotificationServiceImpl implements MemberNotificationService 
     return mapper.findMemberIdsByNotificationId(notificationId);
   }
 
+  /**
+   * Update isSend attribute to 'Y'
+   * @param notificationId
+   * @param memberId
+   */
   @Override
   @Transactional
   public void updateIsSend(Integer notificationId, Integer memberId) {
