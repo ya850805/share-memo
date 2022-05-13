@@ -34,6 +34,11 @@ public class QuartzMemberNotificationServiceImpl implements QuartzMemberNotifica
         quartzNotificationId, memberId);
   }
 
+  /**
+   * Update isSend attribute to 'Y'
+   * @param quartzNotificationId
+   * @param memberId
+   */
   @Override
   public void updateIsSend(Integer quartzNotificationId, Integer memberId) {
     quartzMemberNotificationMapper.updateIsSend(quartzNotificationId, memberId);
