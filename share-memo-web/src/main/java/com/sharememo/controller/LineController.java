@@ -15,7 +15,6 @@ import com.sharememo.service.MemberService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 
-import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.ExecutionException;
 
 @Slf4j
@@ -32,6 +31,8 @@ public class LineController {
 
   @EventMapping
   public TextMessage handleTextMessageEvent(MessageEvent<TextMessageContent> event) {
+    log.info("userId={}", event.getSource().getUserId());
+    log.info("message={}", event.getMessage().getText());
     return new TextMessage(
         lineMessageService.handlePlainTextMessage(
             event.getMessage().getText(), event.getSource().getUserId()));
